@@ -209,9 +209,13 @@ Mirrors the reference repo's proven setup, already scaffolded in this repo:
 ## 9) Open decisions (need an answer before/while building)
 
 1. ~~Exact brand colors~~ — resolved: green `#3CC789` / off-white `#FCFAFA` /
-   slate `#545F66` / near-black `#1D1C1C` (see section 3). Still need: a
-   **logo** that works on this new palette (the current Squarespace logo is
-   teal/gold-coded) — new mark, or recolor of the existing triangle motif?
+   slate `#545F66` / near-black `#1D1C1C` (see section 3). ~~Logo~~ — also
+   resolved: the official mark (`public/images/logo-mark.png`, transparent
+   background, sourced from a speaker-announcement graphic) already fits
+   this palette. Still open: no wordmark/text-lockup version has shown up
+   yet — for now the header pairs the icon mark with a text wordmark
+   rendered in code (Poppins), not a combined logo image. Swap in a real
+   lockup file if/when one exists.
 2. **Fabric Winterfest relationship** — keep `fabricwinterfest.be` as a
    separate external site (current state), or bring it into this repo as a
    page?

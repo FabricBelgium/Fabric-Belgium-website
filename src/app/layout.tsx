@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Fabric Belgium",
   description:
     "Fabric Belgium is a community for data professionals to grow Microsoft Fabric expertise from peers and build a vibrant network.",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
 };
 
 export default function RootLayout({
