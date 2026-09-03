@@ -44,20 +44,33 @@ community-focused site.
 - Built on Squarespace (confirmed via `/cart` route and CDN asset host
   `images.squarespace-cdn.com`)
 
-## 3) Brand snapshot (sampled from the live site, not a finished token set)
+## 3) Brand direction (updated 2026-09-03 — new look, not a Squarespace clone)
+
+The old site's gold/black/white palette (sampled below for the record) is
+**superseded**. The new site uses a palette set explicitly for this rebuild:
+
+| Token | Value | Role |
+|-------|-------|------|
+| Green | `#3CC789` | `brand-500` — primary CTA / highlight color |
+| Off-white | `#FCFAFA` | `surface` — page background |
+| Slate | `#545F66` | `text-secondary` |
+| Near-black | `#1D1C1C` | `text` default + `surface-ink` (dark sections: footer, CTA banners) |
+
+Full tonal ramps (50-950 for `brand`, plus `surface`/`text` variants) are
+already in `tailwind.config.ts`. Still open: the logo itself likely needs a
+refresh to sit well on this palette (see open decisions) — the current
+Squarespace logo is teal/gold-coded.
+
+### For reference: old site's sampled colors (no longer used)
 
 | Token | Value | Source |
 |-------|-------|--------|
-| Gold / brand-500 | `#E5B110` | Computed style of the "EVENTS" button |
+| Gold | `#E5B110` | Computed style of the "EVENTS" button |
 | Black / text | `#111111` (approx.) | Body headings render as pure black; banner box is near-black |
 | White / surface | `#FFFFFF` | Body background |
-| Teal / accent | placeholder only | Read off the triangle mark in the logo PNG by eye, not sampled — needs the source logo file (see below) to get an exact value |
-| Type family | Poppins (Google Font) | `font-family` on buttons and headings |
-| Motif | City skyline watercolor illustration behind the hero | Background image on homepage |
+| Type family | Poppins (Google Font) | `font-family` on buttons and headings, kept in the new palette too |
+| Motif | City skyline watercolor illustration behind the hero | Background image on homepage — still under consideration for the new look |
 | Logo | `logo microsoft fabric belgium website.png` on Squarespace CDN | Triangle mark + "MICROSOFT FABRIC BELGIUM" wordmark |
-
-This is already encoded as a starting point in `tailwind.config.ts` in this
-repo, with comments flagging what's sampled vs. approximated.
 
 ## 4) Target architecture
 
@@ -195,8 +208,10 @@ Mirrors the reference repo's proven setup, already scaffolded in this repo:
 
 ## 9) Open decisions (need an answer before/while building)
 
-1. **Exact brand colors and logo source file** — who has the original
-   Squarespace site assets or a brand kit?
+1. ~~Exact brand colors~~ — resolved: green `#3CC789` / off-white `#FCFAFA` /
+   slate `#545F66` / near-black `#1D1C1C` (see section 3). Still need: a
+   **logo** that works on this new palette (the current Squarespace logo is
+   teal/gold-coded) — new mark, or recolor of the existing triangle motif?
 2. **Fabric Winterfest relationship** — keep `fabricwinterfest.be` as a
    separate external site (current state), or bring it into this repo as a
    page?

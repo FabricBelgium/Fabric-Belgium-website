@@ -1,11 +1,12 @@
 import type { Config } from "tailwindcss";
 
-// Brand tokens below are sampled from the live fabricbelgium.be (Squarespace)
-// site's computed styles: the "EVENTS" button (gold) and body copy (black on
-// white), Poppins as the type family. The teal is an approximation read off
-// the logo mark, NOT sampled precisely — confirm against the source logo
-// file/brand kit before treating it as final. See PROJECT-PLAN.md "Open
-// decisions" for how to resolve this.
+// Brand palette set explicitly by Arno on 2026-09-03, superseding the old
+// fabricbelgium.be Squarespace colors (gold/black/white) this scaffold
+// originally sampled. Four source colors, tonal ramps derived from them:
+//   #3CC789 green   -> brand (primary CTA / highlight)
+//   #FCFAFA off-white -> surface (page background)
+//   #545F66 slate   -> text-secondary
+//   #1D1C1C near-black -> text default / surface.ink (dark sections)
 const config: Config = {
   content: [
     "./src/app/**/*.{ts,tsx,mdx}",
@@ -15,45 +16,30 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          // Gold/mustard - primary CTA + accent color on the live site
-          50: "#fdf7e7",
-          100: "#faecbf",
-          200: "#f5d97f",
-          300: "#f0c53f",
-          400: "#ebb824",
-          500: "#E5B110", // sampled: rgb(229, 177, 16)
-          600: "#c4960d",
-          700: "#a37b0b",
-          800: "#826109",
-          900: "#5c4506",
-          950: "#332703",
-        },
-        accent: {
-          // Placeholder teal from the Microsoft Fabric triangle mark in the
-          // logo. Replace with the exact value once we have the source SVG.
-          50: "#e9f6f6",
-          100: "#c7e8e8",
-          200: "#a5dada",
-          300: "#7cc9c9",
-          400: "#4fb5b5",
-          500: "#1a9d9d",
-          600: "#158383",
-          700: "#116868",
-          800: "#0c4e4e",
-          900: "#073333",
+          50: "#EAFBF3",
+          100: "#C9F3E0",
+          200: "#9FE9C9",
+          300: "#6DD9AA",
+          400: "#4FCF98",
+          500: "#3CC789", // primary
+          600: "#2FAE73",
+          700: "#268F5F",
+          800: "#1E704A",
+          900: "#155537",
+          950: "#0C3521",
         },
         surface: {
-          DEFAULT: "#FFFFFF",
-          muted: "#F7F5F0",
-          subtle: "#EFEBE2",
-          border: "#E3DDD0",
-          ink: "#111111", // near-black banner/footer background seen on the live site
+          DEFAULT: "#FCFAFA", // primary
+          muted: "#F2F0EF",
+          subtle: "#E8E6E4",
+          border: "#DCDADA",
+          ink: "#1D1C1C", // primary, for dark sections (footer, CTA banners)
         },
         text: {
-          DEFAULT: "#111111",
-          secondary: "#3F3F3F",
-          muted: "#6B6B6B",
-          inverse: "#FFFFFF",
+          DEFAULT: "#1D1C1C", // primary
+          secondary: "#545F66", // primary
+          muted: "#8A9096",
+          inverse: "#FCFAFA",
         },
       },
       fontFamily: {
