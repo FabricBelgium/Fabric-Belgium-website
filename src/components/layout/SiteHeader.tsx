@@ -79,7 +79,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button href="/events" size="sm" variant={isOverlay ? "contrast" : "primary"}>
+          <Button href="/events" size="sm" variant={isOverlay ? "inverse" : "default"}>
             Join us
           </Button>
         </div>

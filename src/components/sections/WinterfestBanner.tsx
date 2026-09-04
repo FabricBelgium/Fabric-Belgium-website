@@ -56,7 +56,7 @@ export function WinterfestBanner() {
           same people behind these meetups.
         </p>
         <div className="mt-8">
-          <Button href={site.winterfestUrl} size="lg">
+          <Button href={site.winterfestUrl} variant="inverse" size="lg">
             Visit Winterfest
           </Button>
         </div>

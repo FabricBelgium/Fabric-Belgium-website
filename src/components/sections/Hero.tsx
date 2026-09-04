@@ -110,7 +110,9 @@ export function Hero({ eyebrow }: HeroProps) {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/events">Events</Button>
+            <Button href="/events" variant="inverse">
+              Events
+            </Button>
             <Button href="/partnerships" variant="inverse">
               Partnerships
             </Button>

@@ -1,48 +1,30 @@
 import { OriginButton } from "@/components/ui/origin-button";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "inverse" | "contrast";
+/**
+ * Only two variants, and they differ solely in what the button rests on. Every
+ * button is an outline at rest and floods brand green on hover, so there is no
+ * "primary vs secondary" any more: emphasis comes from placement and copy
+ * rather than from colour.
+ */
+type ButtonVariant = "default" | "inverse";
 type ButtonSize = "sm" | "md" | "lg";
 
-/**
- * Each variant supplies its resting look plus the two colours the origin fill
- * needs: the ink that floods in, and the label colour once it has. They are
- * inversions of the resting pair, so the fill reads as the button turning
- * itself inside out.
- */
 const VARIANTS: Record<
   ButtonVariant,
   { base: string; rest: string; fill: string; filled: string }
 > = {
-  primary: {
-    base: "bg-brand-500",
+  /** On the cream panels. */
+  default: {
+    base: "border border-text/25 bg-transparent",
     rest: "text-text",
-    fill: "bg-text",
-    filled: "text-text-inverse",
+    fill: "bg-brand-500",
+    filled: "text-text",
   },
-  secondary: {
-    base: "border border-surface-border bg-transparent",
-    rest: "text-text",
-    fill: "bg-text",
-    filled: "text-text-inverse",
-  },
-  ghost: {
-    base: "bg-transparent",
-    rest: "text-text",
-    fill: "bg-text",
-    filled: "text-text-inverse",
-  },
-  // Solid light pill for use on dark ground, where a green fill would sit too
-  // close to the shader behind it.
-  contrast: {
-    base: "bg-text-inverse",
-    rest: "text-text",
-    fill: "bg-text",
-    filled: "text-text-inverse",
-  },
+  /** On the shader hero and the dark cards. */
   inverse: {
-    base: "border border-text-inverse/30 bg-transparent",
+    base: "border border-text-inverse/35 bg-transparent",
     rest: "text-text-inverse",
-    fill: "bg-text-inverse",
+    fill: "bg-brand-500",
     filled: "text-text",
   },
 };
@@ -61,6 +43,7 @@ interface ButtonProps {
   children: React.ReactNode;
   /** Renders a link when set, a <button> when not */
   href?: string;
+  /** "inverse" on dark ground, "default" on the cream panels */
   variant?: ButtonVariant;
   size?: ButtonSize;
   type?: "button" | "submit";
@@ -71,7 +54,7 @@ interface ButtonProps {
 export function Button({
   children,
   href,
-  variant = "primary",
+  variant = "default",
   size = "md",
   type = "button",
   disabled = false,
@@ -86,6 +69,8 @@ export function Button({
       disabled={disabled}
       fillClassName={v.fill}
       restTextClassName={v.rest}
+      // Near-black on the green fill, never white: brand-500 carries white at
+      // only 2.08:1, which fails even the 3:1 bar for large text.
       filledTextClassName={v.filled}
       className={`${BASE} ${v.base} ${SIZES[size]} ${className}`}
     >

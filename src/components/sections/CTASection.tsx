@@ -71,16 +71,11 @@ export function CTASection({
           </p>
         )}
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button
-            href={ctaHref}
-            size="lg"
-            variant={isDark ? "primary" : "secondary"}
-            className={isDark ? "" : "border-text/30 hover:bg-surface"}
-          >
+          <Button href={ctaHref} size="lg" variant={isDark ? "inverse" : "default"}>
             {ctaText}
           </Button>
           {secondaryCtaText && secondaryCtaHref && (
-            <Button href={secondaryCtaHref} size="lg" variant={isDark ? "inverse" : "ghost"}>
+            <Button href={secondaryCtaHref} size="lg" variant={isDark ? "inverse" : "default"}>
               {secondaryCtaText}
             </Button>
           )}

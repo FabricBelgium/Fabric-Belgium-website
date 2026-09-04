@@ -129,7 +129,9 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
             from peers, at free meetups across the country.
           </p>
           <div className="mt-[2vw] flex flex-wrap gap-3">
-            <Button href="/events">Events</Button>
+            <Button href="/events" variant="inverse">
+              Events
+            </Button>
             <Button href="/partnerships" variant="inverse">
               Partnerships
             </Button>
@@ -163,9 +165,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
                 : "The next meetup is being scheduled. Everything so far is on the events page."}
             </p>
             <div className="mt-[2vw] flex flex-wrap gap-3">
-              <Button href="/events" variant="secondary">
-                All events &amp; archive
-              </Button>
+              <Button href="/events">All events &amp; archive</Button>
             </div>
           </div>
 
@@ -223,7 +223,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         </div>
 
         <div className="mt-[2vw]">
-          <Button href={site.winterfestUrl} size="lg">
+          <Button href={site.winterfestUrl} variant="inverse" size="lg">
             Visit Winterfest
           </Button>
         </div>
