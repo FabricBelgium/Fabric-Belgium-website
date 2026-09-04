@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { HomeStory } from "@/components/sections/HomeStory";
-import { getUpcomingEvent } from "@/lib/content/events";
+import { getUpcomingEvents } from "@/lib/content/events";
 import { getPartners } from "@/lib/content/partners";
 import { formatEventDate } from "@/lib/format";
 
@@ -18,11 +18,12 @@ export const metadata: Metadata = {
  * sections. See components/sections/HomeStory.tsx.
  */
 export default function Home() {
-  const upcoming = getUpcomingEvent();
+  const upcoming = getUpcomingEvents();
   const partners = getPartners();
 
-  const heroEyebrow = upcoming
-    ? `Next meetup · ${formatEventDate(upcoming.date, {
+  const nextEvent = upcoming[0];
+  const heroEyebrow = nextEvent
+    ? `Next meetup · ${formatEventDate(nextEvent.date, {
         day: "numeric",
         month: "long",
         year: "numeric",

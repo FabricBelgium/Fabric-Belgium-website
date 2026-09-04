@@ -128,11 +128,16 @@ export function getAllEvents(): FabricEvent[] {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-/** The next event to show at the top of the homepage, if there is one. */
-export function getUpcomingEvent(): FabricEvent | undefined {
+/** Every scheduled event, soonest first. */
+export function getUpcomingEvents(): FabricEvent[] {
   return getAllEvents()
     .filter((event) => event.status === "upcoming")
-    .sort((a, b) => a.date.localeCompare(b.date))[0];
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/** The next event only — used where a single event is being detailed. */
+export function getUpcomingEvent(): FabricEvent | undefined {
+  return getUpcomingEvents()[0];
 }
 
 export function getPastEvents(): FabricEvent[] {

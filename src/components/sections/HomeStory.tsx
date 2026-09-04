@@ -57,11 +57,18 @@ function Rule({ tone }: { tone: "dark" | "light" }) {
 }
 
 interface HomeStoryProps {
-  upcoming?: FabricEvent;
+  /** Every scheduled event, soonest first. */
+  upcoming: FabricEvent[];
   partners: Partner[];
   /** e.g. "Next meetup · 15 October 2026" */
   eyebrow?: string;
 }
+
+/**
+ * How many events the card lists before deferring to /events. Capped because
+ * panel 02 is pinned: a longer list would be clipped, not scrollable.
+ */
+const MAX_UPCOMING_ON_CARD = 4;
 
 /**
  * The whole homepage as one pinned, stacking scroll: five full-screen panels
@@ -75,12 +82,8 @@ interface HomeStoryProps {
  * component leaves unpinned and so the only one free to grow.
  */
 export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
-  const timeRange = upcoming
-    ? [upcoming.startTime, upcoming.endTime].filter(Boolean).join(" – ")
-    : "";
-  const venueLine = upcoming?.venue
-    ? [upcoming.venue.name, upcoming.venue.city].filter(Boolean).join(", ")
-    : undefined;
+  const shownUpcoming = upcoming.slice(0, MAX_UPCOMING_ON_CARD);
+  const moreUpcoming = upcoming.length - shownUpcoming.length;
 
   return (
     <FlowArt aria-label="Fabric Belgium">
@@ -141,98 +144,67 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         <p className={KICKER}>02 — Events</p>
         <Rule tone="dark" />
 
-        <div>
-          <h2 className={HEADLINE}>
-            Join
-            <br />
-            <span className={ACCENT_ON_LIGHT_DISPLAY}>Us</span>
-            <br />
-            Next
-          </h2>
-        </div>
-
-        <Rule tone="dark" />
-
-        {upcoming ? (
-          <div className="flex flex-wrap gap-[3vw]">
-            <div className="min-w-[260px] flex-1">
-              <p className={`text-lg font-bold uppercase tracking-wide ${ACCENT_ON_LIGHT_LABEL}`}>
-                {upcoming.title}
-              </p>
-              <dl className="mt-4 space-y-2">
-                <div className="flex gap-3">
-                  <dt className={`w-16 shrink-0 ${META_LABEL}`}>Date</dt>
-                  <dd className={META_VALUE}>{formatEventDate(upcoming.date)}</dd>
-                </div>
-                {timeRange && (
-                  <div className="flex gap-3">
-                    <dt className={`w-16 shrink-0 ${META_LABEL}`}>Time</dt>
-                    <dd className={META_VALUE}>{timeRange}</dd>
-                  </div>
-                )}
-                {venueLine && (
-                  <div className="flex gap-3">
-                    <dt className={`w-16 shrink-0 ${META_LABEL}`}>Venue</dt>
-                    <dd className={META_VALUE}>{venueLine}</dd>
-                  </div>
-                )}
-                {upcoming.host && (
-                  <div className="flex gap-3">
-                    <dt className={`w-16 shrink-0 ${META_LABEL}`}>Host</dt>
-                    <dd className={META_VALUE}>{upcoming.host}</dd>
-                  </div>
-                )}
-              </dl>
+        {/* Same two-column shape as the partners card: the list is the tallest
+            thing here, so running it beside the headline rather than beneath
+            it is what keeps a pinned panel inside the viewport. */}
+        <div className="flex flex-1 flex-wrap items-center gap-[4vw]">
+          <div className="min-w-[280px] flex-1">
+            <h2 className={HEADLINE}>
+              Join
+              <br />
+              <span className={ACCENT_ON_LIGHT_DISPLAY}>Us</span>
+              <br />
+              Next
+            </h2>
+            <p className={`mt-[2vw] ${LEAD}`}>
+              {upcoming.length > 0
+                ? "Free to attend, always. Full agendas, speakers and directions are on the events page."
+                : "The next meetup is being scheduled — everything so far is on the events page."}
+            </p>
+            <div className="mt-[2vw] flex flex-wrap gap-3">
+              <Button href="/events" variant="secondary">
+                All events &amp; archive
+              </Button>
             </div>
-
-            {upcoming.agenda.length > 0 && (
-              <div className="min-w-[240px] flex-1">
-                <p className={`${COL_TITLE} ${ACCENT_ON_LIGHT_LABEL}`}>Agenda</p>
-                <ol className="space-y-1.5">
-                  {upcoming.agenda.map((item) => (
-                    <li
-                      key={`${item.time}-${item.title}`}
-                      className="flex gap-3 text-sm normal-case tracking-normal"
-                    >
-                      <span className="w-12 shrink-0 font-semibold tabular-nums opacity-60">
-                        {item.time}
-                      </span>
-                      <span>{item.title}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
-
-            {upcoming.speakers.length > 0 && (
-              <div className="hidden min-w-[220px] flex-1 sm:block">
-                <p className={`${COL_TITLE} ${ACCENT_ON_LIGHT_LABEL}`}>Speakers</p>
-                <ul className="space-y-2">
-                  {upcoming.speakers.map((speaker, index) => (
-                    <li
-                      key={`${speaker.name}-${index}`}
-                      className="text-sm normal-case tracking-normal"
-                    >
-                      <span className="font-semibold">{speaker.name}</span>
-                      <span className="block opacity-70">{speaker.talk}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
           </div>
-        ) : (
-          <p className={LEAD}>
-            The next meetup is being scheduled — the archive of everything so far is on the events
-            page.
-          </p>
-        )}
 
-        <div className="mt-[2vw] flex flex-wrap gap-3">
-          {upcoming?.registerUrl && <Button href={upcoming.registerUrl}>Register</Button>}
-          <Button href="/events" variant="secondary">
-            All events &amp; archive
-          </Button>
+          {upcoming.length > 0 && (
+            <div className="min-w-[300px] flex-1">
+              <ul className="divide-y divide-black/10 border-y border-black/10">
+                {shownUpcoming.map((event) => {
+                  const where = [event.venue?.name, event.venue?.city].filter(Boolean).join(", ");
+                  const when = [event.startTime, event.endTime].filter(Boolean).join(" – ");
+                  return (
+                    <li key={event.slug} className="py-3">
+                      <p
+                        className={`text-xs font-bold uppercase tracking-wider ${ACCENT_ON_LIGHT_LABEL}`}
+                      >
+                        {formatEventDate(event.date, {
+                          weekday: "short",
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </p>
+                      <p className="mt-1 text-base font-bold uppercase tracking-wide">
+                        {event.title}
+                      </p>
+                      {(where || when) && (
+                        <p className="mt-0.5 text-sm normal-case tracking-normal opacity-60">
+                          {[where, when].filter(Boolean).join(" · ")}
+                        </p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              {moreUpcoming > 0 && (
+                <p className="mt-3 text-sm normal-case tracking-normal opacity-60">
+                  + {moreUpcoming} more on the events page
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </FlowSection>
 
