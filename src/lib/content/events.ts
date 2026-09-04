@@ -30,6 +30,12 @@ export interface FabricEvent {
   title: string;
   /** ISO date, "2026-09-24" */
   date: string;
+  /**
+   * The day is not confirmed yet — only the month is. The date still sorts
+   * normally; it is the *display* that drops to "November 2026 · date TBC",
+   * so a provisional date never reaches a visitor as a firm one.
+   */
+  dateTbc?: boolean;
   status: "upcoming" | "past";
   startTime?: string;
   endTime?: string;
@@ -115,6 +121,7 @@ export function getAllEvents(): FabricEvent[] {
         title: asString(data.title) ?? "Untitled event",
         date,
         status: data.status === "upcoming" ? "upcoming" : "past",
+        dateTbc: data.dateTbc === true,
         startTime: asString(data.startTime),
         endTime: asString(data.endTime),
         venue: parseVenue(data.venue),

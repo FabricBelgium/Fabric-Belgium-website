@@ -158,7 +158,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
             </h2>
             <p className={`mt-[2vw] ${LEAD}`}>
               {upcoming.length > 0
-                ? "Free to attend, always. Full agendas, speakers and directions are on the events page."
+                ? "Meetups are free; Winterfest is ticketed. Full agendas, speakers and directions are on the events page."
                 : "The next meetup is being scheduled — everything so far is on the events page."}
             </p>
             <div className="mt-[2vw] flex flex-wrap gap-3">
@@ -179,12 +179,17 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
                       <p
                         className={`text-xs font-bold uppercase tracking-wider ${ACCENT_ON_LIGHT_LABEL}`}
                       >
-                        {formatEventDate(event.date, {
-                          weekday: "short",
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        })}
+                        {event.dateTbc
+                          ? `${formatEventDate(event.date, {
+                              month: "long",
+                              year: "numeric",
+                            })} · date TBC`
+                          : formatEventDate(event.date, {
+                              weekday: "short",
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
                       </p>
                       <p className="mt-1 text-base font-bold uppercase tracking-wide">
                         {event.title}
@@ -229,24 +234,22 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         <Rule tone="light" />
 
         <p className={LEAD}>
-          Fabric Winterfest — a full day of sessions, hands-on content and community, organised by
-          the same people behind these meetups.
+          Friday 4 December 2026 at SnowWorld Antwerpen — a full day of Microsoft Fabric across
+          three tracks, organised by the same people behind these meetups.
         </p>
 
         <div className="flex flex-wrap gap-[3vw]">
           <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Full-day sessions</p>
-            <p className={COL_BODY}>Deep dives that do not fit in a weeknight meetup slot.</p>
+            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Training Bar</p>
+            <p className={COL_BODY}>Hands-on, laptop-open sessions.</p>
           </div>
           <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Hands on</p>
-            <p className={COL_BODY}>Bring a laptop. Leave having built something.</p>
+            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Blue Slope</p>
+            <p className={COL_BODY}>Get going with Fabric and find your footing.</p>
           </div>
           <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>The whole community</p>
-            <p className={COL_BODY}>
-              One day a year the entire Belgian Fabric scene is in one building.
-            </p>
+            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Black Slope</p>
+            <p className={COL_BODY}>The steep stuff, for people already deep in it.</p>
           </div>
         </div>
 

@@ -21,13 +21,16 @@ export default function Home() {
   const upcoming = getUpcomingEvents();
   const partners = getPartners();
 
+  // The eyebrow must not promise a day that is not fixed yet, so an event
+  // still marked dateTbc announces its month only.
   const nextEvent = upcoming[0];
   const heroEyebrow = nextEvent
-    ? `Next meetup · ${formatEventDate(nextEvent.date, {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })}`
+    ? `Next up · ${formatEventDate(
+        nextEvent.date,
+        nextEvent.dateTbc
+          ? { month: "long", year: "numeric" }
+          : { day: "numeric", month: "long", year: "numeric" },
+      )}`
     : undefined;
 
   return (
