@@ -1,0 +1,128 @@
+[
+  {
+    "name": "AE",
+    "logo": "/images/partners/ae.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Arxus",
+    "logo": "/images/partners/arxus.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Bmatix",
+    "logo": "/images/partners/bmatix.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Cloubis",
+    "logo": "/images/partners/cloubis.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Codit",
+    "logo": "/images/partners/codit.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "ConXioN",
+    "logo": "/images/partners/conxion.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Datashift",
+    "logo": "/images/partners/datashift.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Delaware",
+    "logo": "/images/partners/delaware.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Devoteam",
+    "logo": "/images/partners/devoteam.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "element61",
+    "logo": "/images/partners/element61.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "EpicData",
+    "logo": "/images/partners/epicdata.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Kohera",
+    "logo": "/images/partners/kohera.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Microsoft",
+    "logo": "/images/partners/microsoft.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Plainsight",
+    "logo": "/images/partners/plainsight.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Savaco",
+    "logo": "/images/partners/savaco.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Sirus",
+    "logo": "/images/partners/sirus.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Sparkle Data",
+    "logo": "/images/partners/sparkle-data.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Trustteam",
+    "logo": "/images/partners/trustteam.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "U2U",
+    "logo": "/images/partners/u2u.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Visser & Van Baars",
+    "logo": "/images/partners/visser-van-baars.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Xylos",
+    "logo": "/images/partners/xylos.png",
+    "website": "",
+    "tier": "partner"
+  }
+]

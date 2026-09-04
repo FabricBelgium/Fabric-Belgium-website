@@ -45,6 +45,9 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-poppins)", "system-ui", "sans-serif"],
         heading: ["var(--font-poppins)", "system-ui", "sans-serif"],
+        // Editorial accent only (the italic word in the hero headline), never
+        // body copy. See the 1.txt hero demo's "instrument" span.
+        display: ["var(--font-instrument)", "Georgia", "serif"],
       },
       spacing: {
         "18": "4.5rem",
