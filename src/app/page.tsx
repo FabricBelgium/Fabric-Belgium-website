@@ -6,7 +6,7 @@ import { formatEventDate } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Fabric Belgium — the Microsoft Fabric community in Belgium",
+    absolute: "The Microsoft Fabric community in Belgium | Fabric Belgium",
   },
   description:
     "Free meetups, real sessions and a network of data professionals growing their Microsoft Fabric expertise together across Belgium.",

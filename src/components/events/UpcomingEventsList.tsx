@@ -151,7 +151,7 @@ export function UpcomingEventsList({
                         className="text-sm normal-case tracking-normal"
                       >
                         <span className="font-semibold">{speaker.name}</span>
-                        <span className="opacity-70"> — {speaker.talk}</span>
+                        <span className="block opacity-70">{speaker.talk}</span>
                       </li>
                     ))}
                   </ul>

@@ -10,6 +10,6 @@ host: "Fabric Belgium"
 speakers: []
 ---
 
-The highlights from FabCon, brought back to Belgium — what shipped, what it
+The highlights from FabCon, brought back to Belgium. What shipped, what it
 means in practice, and what is worth your time. Date, venue and speakers to be
 announced.

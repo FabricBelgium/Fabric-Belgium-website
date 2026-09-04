@@ -21,5 +21,5 @@ agenda:
 speakers: []
 ---
 
-Three tracks — Training Bar, Blue Slope and Black Slope. Full programme and
+Three tracks: Training Bar, Blue Slope and Black Slope. Full programme and
 speakers on fabricwinterfest.be.

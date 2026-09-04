@@ -18,7 +18,7 @@ export function SpeakerCard({ speaker, compact = false }: SpeakerCardProps) {
     return (
       <li className="text-sm normal-case tracking-normal text-text-secondary">
         <span className="font-semibold text-text">{speaker.name}</span>
-        {" — "}
+        {" · "}
         {speaker.talk}
         {speaker.slidesUrl && (
           <>

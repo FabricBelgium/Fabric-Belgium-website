@@ -58,7 +58,7 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
         role="status"
         className="rounded-card border border-brand-200 bg-brand-50 p-8 text-center"
       >
-        <h3 className="text-lg">Thanks — message sent</h3>
+        <h3 className="text-lg">Message sent</h3>
         <p className="mt-2 text-sm normal-case tracking-normal text-text-secondary">
           We read everything that comes in and will get back to you at the address you gave us.
         </p>

@@ -100,7 +100,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
           <ShaderBackground minHeight="100%" />
         </div>
 
-        <p className={KICKER}>01 — The community</p>
+        <p className={KICKER}>01 / The community</p>
         <Rule tone="light" />
 
         <div>
@@ -125,7 +125,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
 
         <div className="mt-auto">
           <p className={LEAD}>
-            Empower every data professional with a community — grow your Microsoft Fabric expertise
+            Empower every data professional with a community. Grow your Microsoft Fabric expertise
             from peers, at free meetups across the country.
           </p>
           <div className="mt-[2vw] flex flex-wrap gap-3">
@@ -142,7 +142,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
 
       {/* 02 — Events */}
       <FlowSection aria-label="Events" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
-        <p className={KICKER}>02 — Events</p>
+        <p className={KICKER}>02 / Events</p>
         <Rule tone="dark" />
 
         {/* Same two-column shape as the partners card: the list is the tallest
@@ -159,8 +159,8 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
             </h2>
             <p className={`mt-[2vw] ${LEAD}`}>
               {upcoming.length > 0
-                ? "This is where the Belgian Fabric community actually meets — evening sessions through the year, and one very long day in December."
-                : "The next meetup is being scheduled — everything so far is on the events page."}
+                ? "This is where the Belgian Fabric community actually meets. Evening sessions through the year, and one very long day in December."
+                : "The next meetup is being scheduled. Everything so far is on the events page."}
             </p>
             <div className="mt-[2vw] flex flex-wrap gap-3">
               <Button href="/events" variant="secondary">
@@ -187,7 +187,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         aria-label="Fabric Winterfest"
         style={{ backgroundColor: "#1D1C1C", color: "#FCFAFA" }}
       >
-        <p className={KICKER}>03 — The flagship</p>
+        <p className={KICKER}>03 / The flagship</p>
         <Rule tone="light" />
 
         <div>
@@ -203,8 +203,8 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         <Rule tone="light" />
 
         <p className={LEAD}>
-          Friday 4 December 2026 at SnowWorld Antwerpen — a full day of Microsoft Fabric across
-          three tracks, organised by the same people behind these meetups.
+          Friday 4 December 2026 at SnowWorld Antwerpen. A full day of Microsoft Fabric across three
+          tracks, organised by the same people behind these meetups.
         </p>
 
         <div className="flex flex-wrap gap-[3vw]">
@@ -231,7 +231,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
 
       {/* 04 — Partners */}
       <FlowSection aria-label="Partners" style={{ backgroundColor: "#155537", color: "#FCFAFA" }}>
-        <p className={KICKER}>04 — Partners</p>
+        <p className={KICKER}>04 / Partners</p>
         <Rule tone="light" />
 
         {/* Two columns: the pitch on the left, every partner on the right. The
@@ -266,7 +266,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
       {/* 05 — Contact. Last panel: the one FlowArt leaves unpinned, so it is
           the only one free to be taller than the viewport. */}
       <FlowSection aria-label="Contact" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
-        <p className={KICKER}>05 — Contact</p>
+        <p className={KICKER}>05 / Contact</p>
         <Rule tone="dark" />
 
         <div className="flex flex-wrap items-start gap-[4vw]">
@@ -277,7 +277,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
               <span className={ACCENT_ON_LIGHT_DISPLAY}>Hello</span>
             </h2>
             <p className={`mt-[2vw] ${LEAD}`}>
-              Questions about an event, an idea for a session, or interested in partnering — this
+              Questions about an event, an idea for a session, or interested in partnering? This
               reaches the whole organising team.
             </p>
             <dl className="mt-[2vw] space-y-3">
