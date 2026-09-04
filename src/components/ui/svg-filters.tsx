@@ -1,11 +1,12 @@
 /**
- * The two SVG filters the 1.txt hero demo defines: a frosted "glass" tint for
- * pill labels and a gooey blur/threshold for the sliding button group.
+ * The frosted "glass" tint from the hero demo, used by the eyebrow pill.
  *
- * They live here, rendered once from the root layout, rather than inside
- * ShaderBackground where the snippet had them. Filter ids are global: the
- * header uses #gooey-filter on every page, not just the one page that happens
- * to render a shader, and two copies of the same id on one page is invalid.
+ * It lives here, rendered once from the root layout, rather than inside
+ * ShaderBackground where the snippet had it: filter ids are global, and two
+ * copies of the same id on one page is invalid markup.
+ *
+ * The demo's #gooey-filter was dropped along with the sliding arrow button it
+ * existed for.
  */
 export function SvgFilters() {
   return (
@@ -22,16 +23,6 @@ export function SvgFilters() {
                     0 0 0 0.9 0"
             result="tint"
           />
-        </filter>
-        <filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-          <feColorMatrix
-            in="blur"
-            mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-            result="gooey"
-          />
-          <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
         </filter>
       </defs>
     </svg>

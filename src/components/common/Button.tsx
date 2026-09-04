@@ -1,6 +1,6 @@
 import { OriginButton } from "@/components/ui/origin-button";
 
-type ButtonVariant = "primary" | "secondary" | "ghost" | "inverse";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "inverse" | "contrast";
 type ButtonSize = "sm" | "md" | "lg";
 
 /**
@@ -27,6 +27,14 @@ const VARIANTS: Record<
   },
   ghost: {
     base: "bg-transparent",
+    rest: "text-text",
+    fill: "bg-text",
+    filled: "text-text-inverse",
+  },
+  // Solid light pill for use on dark ground, where a green fill would sit too
+  // close to the shader behind it.
+  contrast: {
+    base: "bg-text-inverse",
     rest: "text-text",
     fill: "bg-text",
     filled: "text-text-inverse",

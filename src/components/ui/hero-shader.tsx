@@ -90,10 +90,9 @@ export function ShaderBackground({
       style={{ backgroundColor, minHeight }}
     >
       {/*
-        The snippet's #glass-effect / #gooey-filter defs moved to
-        ui/svg-filters.tsx, rendered once from the root layout — the site
-        header uses the gooey filter on pages that have no shader, and a
-        duplicated filter id would be invalid markup.
+        The snippet's #glass-effect def moved to ui/svg-filters.tsx, rendered
+        once from the root layout: filter ids are global and a duplicated one
+        would be invalid markup.
       */}
 
       {/*

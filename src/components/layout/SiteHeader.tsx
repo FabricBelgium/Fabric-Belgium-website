@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GooeyButton } from "@/components/ui/gooey-button";
+import { Button } from "@/components/common/Button";
 import { navigation, site } from "@/lib/site";
 
 /**
@@ -79,9 +79,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <GooeyButton href="/events" tone={isOverlay ? "dark" : "light"}>
+          <Button href="/events" size="sm" variant={isOverlay ? "contrast" : "primary"}>
             Join us
-          </GooeyButton>
+          </Button>
         </div>
 
         <button
