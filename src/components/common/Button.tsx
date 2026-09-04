@@ -1,15 +1,42 @@
-import Link from "next/link";
+import { OriginButton } from "@/components/ui/origin-button";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "inverse";
 type ButtonSize = "sm" | "md" | "lg";
 
-const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "bg-brand-500 text-text hover:bg-brand-400",
-  secondary:
-    "border border-surface-border bg-transparent text-text hover:border-text hover:bg-surface-muted",
-  ghost: "text-text hover:text-brand-600",
-  inverse:
-    "border border-text-inverse/30 bg-transparent text-text-inverse hover:border-text-inverse/50 hover:bg-text-inverse/10",
+/**
+ * Each variant supplies its resting look plus the two colours the origin fill
+ * needs: the ink that floods in, and the label colour once it has. They are
+ * inversions of the resting pair, so the fill reads as the button turning
+ * itself inside out.
+ */
+const VARIANTS: Record<
+  ButtonVariant,
+  { base: string; rest: string; fill: string; filled: string }
+> = {
+  primary: {
+    base: "bg-brand-500",
+    rest: "text-text",
+    fill: "bg-text",
+    filled: "text-text-inverse",
+  },
+  secondary: {
+    base: "border border-surface-border bg-transparent",
+    rest: "text-text",
+    fill: "bg-text",
+    filled: "text-text-inverse",
+  },
+  ghost: {
+    base: "bg-transparent",
+    rest: "text-text",
+    fill: "bg-text",
+    filled: "text-text-inverse",
+  },
+  inverse: {
+    base: "border border-text-inverse/30 bg-transparent",
+    rest: "text-text-inverse",
+    fill: "bg-text-inverse",
+    filled: "text-text",
+  },
 };
 
 const SIZES: Record<ButtonSize, string> = {
@@ -18,12 +45,9 @@ const SIZES: Record<ButtonSize, string> = {
   lg: "px-8 py-3 text-sm",
 };
 
-// rounded-full, not the rounded-button token: both reference demos build their
-// entire control language out of pills, and mixing 8px-radius buttons with the
-// pill nav in the header read as two different design systems on one page.
-const BASE =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold uppercase tracking-wider transition-colors " +
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600";
+// rounded-full, not the origin brief's rounded-xl: the header nav is built from
+// pills, and mixing radii read as two design systems on one page.
+const BASE = "rounded-full font-semibold uppercase tracking-wider";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -45,31 +69,19 @@ export function Button({
   disabled = false,
   className = "",
 }: ButtonProps) {
-  const classes = `${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
-
-  if (href) {
-    const isExternal = href.startsWith("http");
-    if (isExternal) {
-      return (
-        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
-          {children}
-        </a>
-      );
-    }
-    return (
-      <Link href={href} className={classes}>
-        {children}
-      </Link>
-    );
-  }
+  const v = VARIANTS[variant];
 
   return (
-    <button
+    <OriginButton
+      href={href}
       type={type}
       disabled={disabled}
-      className={`${classes} disabled:cursor-not-allowed disabled:opacity-60`}
+      fillClassName={v.fill}
+      restTextClassName={v.rest}
+      filledTextClassName={v.filled}
+      className={`${BASE} ${v.base} ${SIZES[size]} ${className}`}
     >
       {children}
-    </button>
+    </OriginButton>
   );
 }
