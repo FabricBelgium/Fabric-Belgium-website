@@ -11,6 +11,7 @@ generator's own output, kept verbatim as provenance.
 | [hero-shader.prompt.md](hero-shader.prompt.md) | `ui/hero-shader.tsx` — WebGL mesh gradient |
 | [animated-gradient-background.prompt.md](animated-gradient-background.prompt.md) | `ui/animated-gradient-background.tsx` — radial breathing gradient |
 | [story-scroll.prompt.md](story-scroll.prompt.md) | `ui/story-scroll.tsx` — GSAP pinned/rotating panels |
+| [origin-button.prompt.md](origin-button.prompt.md) | `ui/origin-button.tsx` — ink fill from the pointer's entry point |
 
 **Read these as history, not as instructions.** None of the three components
 matches its prompt: each was adapted for this repo's API versions, brand
