@@ -21,6 +21,5 @@ agenda:
 speakers: []
 ---
 
-A full day of Microsoft Fabric across three tracks — Training Bar, Blue Slope
-and Black Slope. Speakers and the session-by-session programme are published on
-fabricwinterfest.be.
+Three tracks — Training Bar, Blue Slope and Black Slope. Full programme and
+speakers on fabricwinterfest.be.

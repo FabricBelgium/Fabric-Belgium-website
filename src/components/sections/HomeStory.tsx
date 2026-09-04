@@ -1,4 +1,5 @@
 import { Button } from "@/components/common/Button";
+import { UpcomingEventsList } from "@/components/events/UpcomingEventsList";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { PartnerLogoGrid } from "@/components/partners/PartnerLogoGrid";
 import { ShaderBackground } from "@/components/ui/hero-shader";
@@ -158,7 +159,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
             </h2>
             <p className={`mt-[2vw] ${LEAD}`}>
               {upcoming.length > 0
-                ? "Meetups are free; Winterfest is ticketed. Full agendas, speakers and directions are on the events page."
+                ? "This is where the Belgian Fabric community actually meets — evening sessions through the year, and one very long day in December."
                 : "The next meetup is being scheduled — everything so far is on the events page."}
             </p>
             <div className="mt-[2vw] flex flex-wrap gap-3">
@@ -170,39 +171,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
 
           {upcoming.length > 0 && (
             <div className="min-w-[300px] flex-1">
-              <ul className="divide-y divide-black/10 border-y border-black/10">
-                {shownUpcoming.map((event) => {
-                  const where = [event.venue?.name, event.venue?.city].filter(Boolean).join(", ");
-                  const when = [event.startTime, event.endTime].filter(Boolean).join(" – ");
-                  return (
-                    <li key={event.slug} className="py-3">
-                      <p
-                        className={`text-xs font-bold uppercase tracking-wider ${ACCENT_ON_LIGHT_LABEL}`}
-                      >
-                        {event.dateTbc
-                          ? `${formatEventDate(event.date, {
-                              month: "long",
-                              year: "numeric",
-                            })} · date TBC`
-                          : formatEventDate(event.date, {
-                              weekday: "short",
-                              day: "numeric",
-                              month: "short",
-                              year: "numeric",
-                            })}
-                      </p>
-                      <p className="mt-1 text-base font-bold uppercase tracking-wide">
-                        {event.title}
-                      </p>
-                      {(where || when) && (
-                        <p className="mt-0.5 text-sm normal-case tracking-normal opacity-60">
-                          {[where, when].filter(Boolean).join(" · ")}
-                        </p>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
+              <UpcomingEventsList events={shownUpcoming} />
               {moreUpcoming > 0 && (
                 <p className="mt-3 text-sm normal-case tracking-normal opacity-60">
                   + {moreUpcoming} more on the events page
