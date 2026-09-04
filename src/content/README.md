@@ -69,6 +69,13 @@ both matter for how the wall looks:
 so the normalisation done here is what you see. **The tile ratio and the
 canvas ratio have to stay in step** — change one and the sizing drifts.
 
-To add a partner: put the original in `assets/Partners/`, run the same
-trim + area-normalise step to `public/images/partners/<slug>.png`, then add the
-row to `partners.json`.
+To add a partner: drop the original in `assets/Partners/`, then
+
+```bash
+npm i -D sharp                              # only needed to re-run this
+node scripts/normalise-partner-logos.js
+```
+
+and add the row to `partners.json`. The slug comes from the filename, so
+renaming a source file is safe; `SLUG_OVERRIDES` in the script covers the few
+originals whose names do not identify the partner.
