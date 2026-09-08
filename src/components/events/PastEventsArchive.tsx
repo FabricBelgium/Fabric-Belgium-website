@@ -50,7 +50,7 @@ export function PastEventsArchive({ years, openByDefault = 1 }: PastEventsArchiv
                 onClick={() => toggle(year)}
                 aria-expanded={isOpen}
                 aria-controls={`archive-${year}`}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-brand-600"
+                className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-brand-500"
               >
                 <span className="text-xl font-bold tracking-wide">{year}</span>
                 <span className="flex items-center gap-3">
@@ -71,7 +71,7 @@ export function PastEventsArchive({ years, openByDefault = 1 }: PastEventsArchiv
               <ul className="space-y-6 pb-8">
                 {events.map((event) => (
                   <li key={event.slug} className="border-l-2 border-brand-200 pl-4">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-500">
                       {formatEventDate(event.date, {
                         day: "numeric",
                         month: "long",

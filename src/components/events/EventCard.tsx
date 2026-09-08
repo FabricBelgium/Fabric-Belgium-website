@@ -47,7 +47,7 @@ export function EventCard({ event }: EventCardProps) {
                       href={event.venue.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline underline-offset-2 hover:text-brand-600"
+                      className="underline underline-offset-2 hover:text-brand-500"
                     >
                       {venueLine}
                     </a>

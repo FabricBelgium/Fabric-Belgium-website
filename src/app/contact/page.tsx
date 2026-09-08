@@ -21,7 +21,7 @@ export default function ContactPage() {
           Or email us directly at{" "}
           <a
             href={`mailto:${site.email}`}
-            className="font-semibold underline underline-offset-2 hover:text-brand-600"
+            className="font-semibold underline underline-offset-2 hover:text-brand-500"
           >
             {site.email}
           </a>
