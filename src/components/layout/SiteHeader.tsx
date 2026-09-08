@@ -39,25 +39,25 @@ export function SiteHeader() {
         : "text-text-inverse/75 hover:bg-text-inverse/10 hover:text-text-inverse";
     }
     return active
-      ? "bg-brand-100 text-brand-800"
+      ? "bg-brand-100 text-brand-500"
       : "text-text-secondary hover:bg-surface-muted hover:text-text";
   };
 
   return (
     <header className={shell}>
-      <div className="container-site flex h-20 items-center justify-between gap-6">
+      <div className="container-site flex h-24 items-center justify-between gap-6">
         <Link href="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
           <Image
             src="/images/logo-mark.png"
             alt=""
-            width={36}
-            height={36}
-            className="h-9 w-auto"
+            width={44}
+            height={44}
+            className="h-11 w-auto"
             priority
           />
-          <span className={`text-sm font-bold uppercase leading-tight tracking-wider ${wordmark}`}>
+          <span className={`text-base font-bold uppercase leading-tight tracking-wider ${wordmark}`}>
             Microsoft Fabric
-            <span className={`block ${isOverlay ? "text-brand-400" : "text-brand-600"}`}>
+            <span className="block text-brand-500">
               Belgium
             </span>
           </span>
@@ -69,7 +69,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${linkTone(
+              className={`rounded-full px-5 py-2.5 text-sm font-semibold uppercase tracking-wider transition-colors ${linkTone(
                 isActive(item.href),
               )}`}
             >
@@ -79,14 +79,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button href="/events" size="sm" variant={isOverlay ? "inverse" : "default"}>
+          <Button href="/events" size="lg" variant={isOverlay ? "inverse" : "default"}>
             Join us
           </Button>
         </div>
 
         <button
           type="button"
-          className={`-mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden ${
+          className={`-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full md:hidden ${
             isOverlay ? "text-text-inverse" : "text-text"
           }`}
           aria-expanded={menuOpen}
@@ -94,7 +94,7 @@ export function SiteHeader() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          <span aria-hidden="true" className="text-2xl leading-none">
+          <span aria-hidden="true" className="text-3xl leading-none">
             {menuOpen ? "×" : "≡"}
           </span>
         </button>
@@ -116,7 +116,7 @@ export function SiteHeader() {
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 onClick={() => setMenuOpen(false)}
-                className={`border-b py-3 text-sm font-semibold uppercase tracking-wider last:border-0 ${
+                className={`border-b py-3.5 text-base font-semibold uppercase tracking-wider last:border-0 ${
                   isOverlay
                     ? "border-text-inverse/10 text-text-inverse"
                     : "border-surface-border/60 text-text"
@@ -127,7 +127,7 @@ export function SiteHeader() {
             ))}
             <a
               href={`mailto:${site.email}`}
-              className={`py-3 text-sm font-semibold uppercase tracking-wider ${
+              className={`py-3.5 text-base font-semibold uppercase tracking-wider ${
                 isOverlay ? "text-text-inverse/70" : "text-text-secondary"
               }`}
             >

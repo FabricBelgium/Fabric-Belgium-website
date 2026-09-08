@@ -1,7 +1,7 @@
 type TagTone = "brand" | "neutral" | "inverse";
 
 const TONES: Record<TagTone, string> = {
-  brand: "bg-brand-100 text-brand-900",
+  brand: "bg-brand-100 text-brand-500",
   neutral: "bg-surface-muted text-text-secondary",
   inverse: "bg-text-inverse/10 text-text-inverse",
 };

@@ -17,7 +17,7 @@ export function EventAgenda({ items, className = "" }: EventAgendaProps) {
             key={`${item.time}-${item.title}`}
             className="flex gap-4 border-b border-surface-border/70 py-3 last:border-0"
           >
-            <span className="w-14 shrink-0 text-sm font-semibold tabular-nums text-brand-700">
+            <span className="w-14 shrink-0 text-sm font-semibold tabular-nums text-brand-500">
               {item.time}
             </span>
             <span className="text-sm normal-case tracking-normal">

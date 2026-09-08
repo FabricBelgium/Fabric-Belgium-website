@@ -27,7 +27,7 @@ export function SpeakerCard({ speaker, compact = false }: SpeakerCardProps) {
               href={speaker.slidesUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-brand-700 underline underline-offset-2 hover:text-brand-600"
+              className="font-semibold text-brand-500 underline underline-offset-2"
             >
               Slides
             </a>
@@ -41,7 +41,7 @@ export function SpeakerCard({ speaker, compact = false }: SpeakerCardProps) {
     <article className="flex gap-4 border-b border-surface-border/50 pb-4 last:border-0">
       <span
         aria-hidden="true"
-        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-800"
+        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-bold text-brand-500"
       >
         {initials}
       </span>
@@ -58,7 +58,7 @@ export function SpeakerCard({ speaker, compact = false }: SpeakerCardProps) {
             href={speaker.slidesUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-block text-xs font-semibold uppercase tracking-wider text-brand-700 hover:text-brand-600"
+            className="mt-2 inline-block text-xs font-semibold uppercase tracking-wider text-brand-500"
           >
             Slides
           </a>

@@ -34,7 +34,7 @@ function hasDetail(event: FabricEvent): boolean {
  */
 export function UpcomingEventsList({
   events,
-  accentClassName = "text-brand-800",
+  accentClassName = "text-brand-500",
 }: UpcomingEventsListProps) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 

@@ -30,22 +30,20 @@ const LEAD =
 const KICKER = "text-xs font-bold uppercase tracking-[0.2em]";
 
 /**
- * Brand-green accents, stepped to the background they sit on.
- *
- * #3CC789 (brand-500) is only 2.08:1 against the cream panels — it fails even
- * the 3:1 bar for large text, so on cream the accent steps down the same ramp:
- * brand-700 for display type (3.90:1, passes large) and brand-800 for the
- * small labels (5.82:1, passes normal text). On the near-black panel the
- * literal #3CC789 lands at 7.87:1, so that one gets the real thing.
+ * Brand-green accents. Pinned to the literal #3CC789 (brand-500) everywhere
+ * per brand guidance, including on the cream panels where it only reaches a
+ * 2.08:1 contrast ratio against the background (below the 3:1 bar for large
+ * text) — a known legibility tradeoff, accepted deliberately.
  */
-const ACCENT_ON_LIGHT_DISPLAY = "text-brand-700";
-const ACCENT_ON_LIGHT_LABEL = "text-brand-800";
+const ACCENT_ON_LIGHT_DISPLAY = "text-brand-500";
+const ACCENT_ON_LIGHT_LABEL = "text-brand-500";
 const ACCENT_ON_DARK = "text-brand-500";
-const COL_TITLE = "mb-1.5 text-xs font-bold uppercase tracking-wider";
+// Fluid rather than a fixed text-xs/0.95rem cap: on a wide monitor the tracks
+// were the one part of the Winterfest panel that stopped scaling with it.
+const COL_TITLE =
+  "mb-2 text-[clamp(0.8rem,1.05vw,1.05rem)] font-bold uppercase tracking-wider";
 const COL_BODY =
-  "text-[clamp(0.8rem,1.1vw,0.95rem)] normal-case leading-relaxed tracking-normal opacity-75";
-const META_LABEL = "text-xs uppercase tracking-wider opacity-60";
-const META_VALUE = "text-sm font-semibold normal-case tracking-normal";
+  "text-[clamp(0.9rem,1.35vw,1.2rem)] normal-case leading-relaxed tracking-normal opacity-75";
 
 function Rule({ tone }: { tone: "dark" | "light" }) {
   return (
@@ -61,8 +59,6 @@ interface HomeStoryProps {
   /** Every scheduled event, soonest first. */
   upcoming: FabricEvent[];
   partners: Partner[];
-  /** e.g. "Next meetup · 15 October 2026" */
-  eyebrow?: string;
 }
 
 /**
@@ -82,7 +78,7 @@ const MAX_UPCOMING_ON_CARD = 4;
  * Contact is deliberately last, because the final panel is the only one the
  * component leaves unpinned and so the only one free to grow.
  */
-export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
+export function HomeStory({ upcoming, partners }: HomeStoryProps) {
   const shownUpcoming = upcoming.slice(0, MAX_UPCOMING_ON_CARD);
   const moreUpcoming = upcoming.length - shownUpcoming.length;
 
@@ -100,30 +96,22 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
           <ShaderBackground minHeight="100%" />
         </div>
 
-        <p className={KICKER}>01 / The community</p>
+        <p className={KICKER}>01 / Welcome to Fabric Belgium</p>
         <Rule tone="light" />
 
-        <div>
-          {eyebrow && (
-            <div
-              className="relative mb-[2vw] inline-flex items-center rounded-full bg-white/10 px-4 py-1.5 backdrop-blur-sm"
-              style={{ filter: "url(#glass-effect)" }}
-            >
-              <span className="relative z-10 text-xs font-medium uppercase tracking-wider">
-                {eyebrow}
-              </span>
-            </div>
-          )}
+        {/* One flex child, not four: the panel's inner container is
+            `justify-between`, so every extra child here becomes another gap
+            the headline and the lead get pushed apart by. `my-auto` then
+            splits the panel's leftover height evenly above and below. */}
+        <div className="my-auto">
           <h1 className={LANDING_HEADLINE}>
             Fabric
             <br />
             Belgium
           </h1>
-        </div>
 
-        <Rule tone="light" />
+          <Rule tone="light" />
 
-        <div className="mt-auto">
           <p className={LEAD}>
             Empower every data professional with a community. Grow your Microsoft Fabric expertise
             from peers, at free meetups across the country.
@@ -187,7 +175,7 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
         aria-label="Fabric Winterfest"
         style={{ backgroundColor: "#1D1C1C", color: "#FCFAFA" }}
       >
-        <p className={KICKER}>03 / The flagship</p>
+        <p className={KICKER}>03 / Fabric Winterfest</p>
         <Rule tone="light" />
 
         <div>
@@ -280,32 +268,6 @@ export function HomeStory({ upcoming, partners, eyebrow }: HomeStoryProps) {
               Questions about an event, an idea for a session, or interested in partnering? This
               reaches the whole organising team.
             </p>
-            <dl className="mt-[2vw] space-y-3">
-              <div>
-                <dt className={META_LABEL}>Email</dt>
-                <dd className="mt-1">
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="text-sm font-semibold normal-case tracking-normal underline underline-offset-2 hover:text-brand-600"
-                  >
-                    {site.email}
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className={META_LABEL}>LinkedIn</dt>
-                <dd className="mt-1">
-                  <a
-                    href={site.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-semibold normal-case tracking-normal underline underline-offset-2 hover:text-brand-600"
-                  >
-                    Follow the community
-                  </a>
-                </dd>
-              </div>
-            </dl>
           </div>
 
           <div className="min-w-[300px] flex-1">
