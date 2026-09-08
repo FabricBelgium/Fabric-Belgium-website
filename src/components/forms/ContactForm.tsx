@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { site } from "@/lib/site";
 
@@ -149,6 +150,23 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
           .
         </p>
       )}
+
+      {/*
+        GDPR Art. 13 wants this at the point of collection, not only linked from
+        the footer. Deliberately a notice and not a consent checkbox: we rely on
+        legitimate interest to answer an enquiry someone chose to send, and a
+        tickbox would ask for a consent we are not actually relying on.
+      */}
+      <p className="text-xs normal-case leading-relaxed tracking-normal text-text-muted">
+        We use what you send here only to reply to you, and we do not share it. See the{" "}
+        <Link
+          href="/privacy"
+          className="font-semibold underline underline-offset-2 hover:text-brand-500"
+        >
+          privacy policy
+        </Link>
+        .
+      </p>
 
       <Button type="submit" size="lg" disabled={state === "submitting"}>
         {state === "submitting" ? "Sending…" : "Send message"}
