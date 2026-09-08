@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { legalNavigation } from "@/lib/legal";
 import { navigation, site } from "@/lib/site";
 
 /**
@@ -88,11 +89,26 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-surface-border/60">
-        <div className="container-site flex flex-col gap-2 py-6 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            &copy; {new Date().getFullYear()} {site.name}. Run by the community, for the community.
-          </p>
-          <p>Not affiliated with or endorsed by Microsoft.</p>
+        <div className="container-site flex flex-col gap-4 py-6 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <p>
+              &copy; {new Date().getFullYear()} {site.name}. Run by the community, for the
+              community.
+            </p>
+            <p>Not affiliated with or endorsed by Microsoft.</p>
+          </div>
+
+          <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            {legalNavigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-brand-500"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
