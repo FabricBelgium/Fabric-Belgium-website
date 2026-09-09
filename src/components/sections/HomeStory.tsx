@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/common/Button";
 import { UpcomingEventsList } from "@/components/events/UpcomingEventsList";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -159,6 +160,16 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
 
           {upcoming.length > 0 && (
             <div className="min-w-[300px] flex-1">
+              <div className="mb-[2vw] overflow-hidden rounded-xl">
+                <Image
+                  src="/images/events/meetup-crowd.jpg"
+                  alt="Attendees at a Fabric Belgium meetup, watching a speaker present"
+                  width={1600}
+                  height={739}
+                  sizes="(min-width: 768px) 40vw, 90vw"
+                  className="h-auto w-full object-cover"
+                />
+              </div>
               <UpcomingEventsList events={shownUpcoming} />
               {moreUpcoming > 0 && (
                 <p className="mt-3 text-sm normal-case tracking-normal opacity-60">
@@ -178,42 +189,60 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
         <p className={KICKER}>03 / Fabric Winterfest</p>
         <Rule tone="light" />
 
-        <div>
-          <h2 className={HEADLINE}>
-            One
-            <br />
-            <span className={ACCENT_ON_DARK}>Big</span>
-            <br />
-            Day
-          </h2>
-        </div>
+        {/* Same two-column shape as the events and partners cards: the photo
+            runs beside the copy rather than beneath it, so it adds width
+            instead of height inside this pinned panel. */}
+        <div className="flex flex-1 flex-wrap items-center gap-[4vw]">
+          <div className="min-w-[280px] flex-1">
+            <h2 className={HEADLINE}>
+              One
+              <br />
+              <span className={ACCENT_ON_DARK}>Big</span>
+              <br />
+              Day
+            </h2>
 
-        <Rule tone="light" />
+            <Rule tone="light" />
 
-        <p className={LEAD}>
-          Friday 4 December 2026 at SnowWorld Antwerpen. A full day of Microsoft Fabric across three
-          tracks, organised by the same people behind these meetups.
-        </p>
+            <p className={LEAD}>
+              Friday 4 December 2026 at SnowWorld Antwerpen. A full day of Microsoft Fabric across
+              three tracks, organised by the same people behind these meetups.
+            </p>
 
-        <div className="flex flex-wrap gap-[3vw]">
-          <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Training Bar</p>
-            <p className={COL_BODY}>Hands-on, laptop-open sessions.</p>
+            <div className="mt-[2vw] flex flex-wrap gap-[3vw]">
+              <div className="min-w-[140px] flex-1">
+                <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Training Bar</p>
+                <p className={COL_BODY}>Hands-on, laptop-open sessions.</p>
+              </div>
+              <div className="min-w-[140px] flex-1">
+                <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Blue Slope</p>
+                <p className={COL_BODY}>Get going with Fabric and find your footing.</p>
+              </div>
+              <div className="min-w-[140px] flex-1">
+                <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Black Slope</p>
+                <p className={COL_BODY}>The steep stuff, for people already deep in it.</p>
+              </div>
+            </div>
+
+            <div className="mt-[2vw]">
+              <Button href={site.winterfestUrl} variant="inverse" size="lg">
+                Visit Winterfest
+              </Button>
+            </div>
           </div>
-          <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Blue Slope</p>
-            <p className={COL_BODY}>Get going with Fabric and find your footing.</p>
-          </div>
-          <div className="min-w-[180px] flex-1">
-            <p className={`${COL_TITLE} ${ACCENT_ON_DARK}`}>Black Slope</p>
-            <p className={COL_BODY}>The steep stuff, for people already deep in it.</p>
-          </div>
-        </div>
 
-        <div className="mt-[2vw]">
-          <Button href={site.winterfestUrl} variant="inverse" size="lg">
-            Visit Winterfest
-          </Button>
+          <div className="min-w-[280px] flex-1">
+            <div className="overflow-hidden rounded-xl">
+              <Image
+                src="/images/winterfest/winterfest-2025.jpg"
+                alt="A speaker presenting Power BI dashboards at Fabric Winterfest, held at SnowWorld Antwerpen"
+                width={1400}
+                height={1050}
+                sizes="(min-width: 768px) 40vw, 90vw"
+                className="h-auto w-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </FlowSection>
 
@@ -229,14 +258,15 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
         <div className="flex flex-1 flex-wrap items-center gap-[4vw]">
           <div className="min-w-[280px] flex-1">
             <h2 className={HEADLINE}>
-              Back
+              Our
               <br />
-              The
+              Proud
               <br />
-              Room
+              Partners
             </h2>
             <p className={`mt-[2vw] ${LEAD}`}>
-              Meetups stay free to attend because these companies cover the room and the food.
+              These companies believe in our community and help us bring people together to
+              learn, connect, and grow.
             </p>
             <div className="mt-[2vw]">
               <Button href="/partnerships" variant="inverse" size="lg">
