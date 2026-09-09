@@ -2,6 +2,9 @@
 export const site = {
   name: "Microsoft Fabric Belgium",
   shortName: "Fabric Belgium",
+  // Canonical production origin, no trailing slash. Used to build absolute
+  // URLs for the sitemap and robots.txt.
+  url: "https://www.fabricbelgium.be",
   email: "team@fabricbelgium.be",
   // Legacy company-page slug from before the group renamed to Fabric Belgium.
   // The URL is correct even though it says "power-bi-brussels".
