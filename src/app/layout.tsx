@@ -3,6 +3,7 @@ import { Instrument_Serif, Poppins } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SvgFilters } from "@/components/ui/svg-filters";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -22,15 +23,33 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
 });
 
+const description =
+  "Fabric Belgium is a community for data professionals to grow Microsoft Fabric expertise from peers and build a vibrant network.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: "Fabric Belgium",
     template: "%s | Fabric Belgium",
   },
-  description:
-    "Fabric Belgium is a community for data professionals to grow Microsoft Fabric expertise from peers and build a vibrant network.",
+  description,
   icons: {
     icon: "/images/favicon.ico",
+  },
+  openGraph: {
+    title: "Fabric Belgium",
+    description,
+    url: site.url,
+    siteName: "Fabric Belgium",
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630 }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fabric Belgium",
+    description,
+    images: ["/images/og-image.png"],
   },
 };
 
