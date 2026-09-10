@@ -1,6 +1,6 @@
 # Fabric Belgium website
 
-Next.js + Tailwind + Azure Static Web Apps rebuild of [fabricbelgium.be](https://www.fabricbelgium.be/),
+Next.js + Tailwind + GitHub Pages rebuild of [fabricbelgium.be](https://www.fabricbelgium.be/),
 following the same stack and workflow as the Plainsight website.
 
 See [PROJECT-PLAN.md](PROJECT-PLAN.md) for the full build plan: source

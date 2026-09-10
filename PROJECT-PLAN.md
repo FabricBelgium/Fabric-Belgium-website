@@ -1,4 +1,19 @@
-# Fabric Belgium Website — Build Plan (Squarespace -> Next.js + Tailwind + Azure SWA)
+# Fabric Belgium Website — Build Plan (Squarespace -> Next.js + Tailwind)
+
+> **Decisions taken since this plan was written (2026-09-10).** Two open items
+> below are now settled, and the sections that assume otherwise are stale:
+>
+> - **Hosting is GitHub Pages**, not Azure Static Web Apps. The site is live at
+>   www.fabricbelgium.be, built and published by
+>   `.github/workflows/deploy-pages.yml`. No Azure subscription or SWA deploy
+>   token is needed, and `azure-swa-deploy.yml` has been removed.
+> - **The contact form goes to Outlook, not HubSpot.** It POSTs to a Power
+>   Automate / Logic App HTTP trigger in the Fabric Belgium Microsoft tenant,
+>   which emails `team@fabricbelgium.be`. HubSpot is explicitly out: the only
+>   portal available is Plainsight's, and Fabric Belgium enquiries must not land
+>   in another company's CRM. There is no `api/` Azure Function and none is
+>   planned; with the endpoint unset the form falls back to the visitor's own
+>   mail client.
 
 This plan follows the same playbook Plainsight used to move `plainsight.pro`
 off Squarespace (see `reference-plainsight-website/MIGRATION-PLAN.md` in the
@@ -81,14 +96,16 @@ Same stack as `plainsight-website`, right-sized:
   applies: the file you commit is the file every visitor downloads)
 - **Styling:** Tailwind CSS with semantic tokens (`brand`, `accent`,
   `surface`, `text`) instead of hardcoded hex
-- **Hosting:** Azure Static Web Apps, GitHub Actions CI/CD, PR preview URLs
+- **Hosting:** GitHub Pages on the `FabricBelgium/Fabric-Belgium-website`
+  repo, published from `main` by GitHub Actions. Custom domain
+  `www.fabricbelgium.be` with a GitHub-managed TLS certificate.
 - **Content:** Markdown + frontmatter for events, JSON for partners/sponsors
   (no blog — Fabric Belgium doesn't currently publish one; leave the
   structure extensible if that changes)
-- **Forms:** Contact + "become a partner" -- HubSpot embed if Fabric Belgium
-  gets its own HubSpot portal/forms, otherwise an Azure Function that emails
-  `team@fabricbelgium.be` (mirrors `api/src/functions/job-application.js` in
-  the reference repo)
+- **Forms:** Contact + "become a partner" -- POST to a Power Automate /
+  Logic App HTTP trigger in the Fabric Belgium tenant, which emails
+  `team@fabricbelgium.be` through Outlook. Endpoint in
+  `NEXT_PUBLIC_CONTACT_ENDPOINT`; unset falls back to `mailto:`.
 - **Analytics:** GA4 (optional, matches reference site's pattern)
 
 ### Project structure

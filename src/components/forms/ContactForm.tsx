@@ -5,16 +5,25 @@ import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { site } from "@/lib/site";
 
-type SubmitState = "idle" | "submitting" | "success" | "error";
+type SubmitState = "idle" | "submitting" | "success" | "handoff" | "error";
 
 /**
- * Posts to the Azure Function fallback described in PROJECT-PLAN.md §4. The
- * backend decision (HubSpot portal vs. this endpoint) is still open — if it
- * lands on HubSpot, swap the body of `handleSubmit` for the embed and keep
- * the markup. Any failure falls back to a plain mailto so a message is never
- * silently lost.
+ * Submits to a Power Automate / Logic App HTTP trigger in the Fabric Belgium
+ * Microsoft tenant, which sends the enquiry on to `site.email` through Outlook.
+ * Deliberately not HubSpot and not a third-party form service: nobody outside
+ * the tenant should hold enquiry data.
+ *
+ * The URL is a build-time public value — `NEXT_PUBLIC_*` is inlined into the
+ * client bundle, and the trigger's own `sig` query parameter travels with it.
+ * That is inherent to posting from a static page: treat the URL as public, keep
+ * the flow's only action "email the team", and rotate it from the flow if it
+ * ever attracts spam. The honeypot below drops the cheapest bots.
+ *
+ * With no endpoint configured the form hands off to the visitor's own mail
+ * client instead of failing, so an enquiry is never silently swallowed while
+ * the flow is still being set up.
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "/api/contact-submission";
+const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "";
 
 const FIELD_CLASSES =
   "w-full rounded-button border border-surface-border bg-surface px-4 py-3 text-sm text-text " +
@@ -27,23 +36,49 @@ interface ContactFormProps {
   defaultSubject?: string;
 }
 
+/** Builds the mailto: used both as the no-endpoint path and the failure path. */
+function mailtoFor(payload: Record<string, string>) {
+  const subject = payload.subject?.trim() || "Website enquiry";
+  const body = [
+    `Name: ${payload.firstName ?? ""} ${payload.lastName ?? ""}`.trim(),
+    `Email: ${payload.email ?? ""}`,
+    "",
+    payload.message ?? "",
+  ].join("\n");
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
   const [state, setState] = useState<SubmitState>("idle");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setState("submitting");
 
     // Captured before the await: React nulls out currentTarget once the
     // synthetic event has been handled.
     const form = event.currentTarget;
-    const payload = Object.fromEntries(new FormData(form));
+    const payload = Object.fromEntries(new FormData(form)) as Record<string, string>;
 
+    // Honeypot: a real person never fills a field they cannot see. Report
+    // success rather than an error so a bot learns nothing from the response.
+    if (payload.website) {
+      setState("success");
+      form.reset();
+      return;
+    }
+
+    if (!ENDPOINT) {
+      window.location.href = mailtoFor(payload);
+      setState("handoff");
+      return;
+    }
+
+    setState("submitting");
     try {
       const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, sentFrom: site.url }),
       });
       if (!response.ok) throw new Error(`Request failed: ${response.status}`);
       setState("success");
@@ -62,6 +97,25 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
         <h3 className="text-lg">Message sent</h3>
         <p className="mt-2 text-sm normal-case tracking-normal text-text-secondary">
           We read everything that comes in and will get back to you at the address you gave us.
+        </p>
+      </div>
+    );
+  }
+
+  if (state === "handoff") {
+    return (
+      <div
+        role="status"
+        className="rounded-card border border-brand-200 bg-brand-50 p-8 text-center"
+      >
+        <h3 className="text-lg">Almost there</h3>
+        <p className="mt-2 text-sm normal-case tracking-normal text-text-secondary">
+          Your mail app should have opened with the message ready — press send and it reaches us. If
+          nothing opened, write to{" "}
+          <a href={`mailto:${site.email}`} className="font-semibold underline underline-offset-2">
+            {site.email}
+          </a>
+          .
         </p>
       </div>
     );
@@ -136,6 +190,19 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
           required
           className={`mt-2 ${FIELD_CLASSES}`}
         />
+      </div>
+
+      {/*
+        Honeypot. Positioned off-screen rather than display:none, which some bots
+        skip, and kept out of the tab order and the accessibility tree so nobody
+        real ever lands on it.
+      */}
+      <div
+        className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+        aria-hidden="true"
+      >
+        <label htmlFor="website">Leave this field empty</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {state === "error" && (
