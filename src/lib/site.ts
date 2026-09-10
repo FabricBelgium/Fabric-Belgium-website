@@ -6,6 +6,11 @@ export const site = {
   // URLs for the sitemap and robots.txt.
   url: "https://www.fabricbelgium.be",
   email: "team@fabricbelgium.be",
+  // Share link of the Microsoft Form behind the contact page, or "" while
+  // none exists. Read by ContactForm to choose between the embed and the
+  // mailto fallback, and by the privacy and cookie notices so their wording
+  // describes whichever one this build actually ships.
+  contactFormUrl: process.env.NEXT_PUBLIC_CONTACT_FORM_URL ?? "",
   // Legacy company-page slug from before the group renamed to Fabric Belgium.
   // The URL is correct even though it says "power-bi-brussels".
   linkedin: "https://www.linkedin.com/company/power-bi-brussels",

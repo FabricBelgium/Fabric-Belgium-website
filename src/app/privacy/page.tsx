@@ -28,7 +28,8 @@ export default function PrivacyPage() {
     >
       <h2>Who is responsible for your data</h2>
       <p>
-        The data controller for this website is <Detail value={legalEntity.name} label="legal name" />
+        The data controller for this website is{" "}
+        <Detail value={legalEntity.name} label="legal name" />
         , at <Detail value={legalEntity.address} label="address" />. You can reach us at{" "}
         <a href={`mailto:${site.email}`}>{site.email}</a> for anything in this policy.
       </p>
@@ -38,13 +39,27 @@ export default function PrivacyPage() {
       <h3>Messages you send us</h3>
       <p>
         The contact form asks for your first name, last name, email address, a subject and your
-        message. It is delivered to the organising team&rsquo;s shared mailbox and nowhere else. We
-        use it only to read and answer what you sent.
+        message. It reaches the organising team&rsquo;s shared mailbox, and we use it only to read
+        and answer what you sent.
       </p>
+      {site.contactFormUrl ? (
+        <p>
+          The form itself is a Microsoft Form inside our own Microsoft 365 tenant, so a copy of your
+          response is also stored there and Microsoft processes it on our behalf. Nobody outside the
+          organising team can read it. It does not load until you ask it to, and if you would rather
+          not use it at all, email us directly and only the mailbox holds your message.
+        </p>
+      ) : (
+        <p>
+          The form does not send anything by itself: it opens your own mail program with the message
+          ready, so you send it from your address and only our mailbox holds it. Nothing is stored
+          anywhere else along the way.
+        </p>
+      )}
       <p>
-        The legal basis is our legitimate interest in responding to people who contact us (GDPR
-        Art. 6(1)(f)). Where your message is about becoming a partner, we also process it to take
-        steps at your request before entering into an agreement (Art. 6(1)(b)).
+        The legal basis is our legitimate interest in responding to people who contact us (GDPR Art.
+        6(1)(f)). Where your message is about becoming a partner, we also process it to take steps
+        at your request before entering into an agreement (Art. 6(1)(b)).
       </p>
       <p>
         Giving us this data is entirely voluntary — but without an email address we have no way to
@@ -56,9 +71,9 @@ export default function PrivacyPage() {
       <p>
         This site is hosted on Microsoft Azure Static Web Apps. Like any web host, it processes
         technical request data — including your IP address, the page requested, and your browser
-        type — to deliver pages and to keep the service secure and available. The legal basis is
-        our legitimate interest in operating a working, secure website (Art. 6(1)(f)). We do not
-        use these logs to build profiles or to identify individual visitors.
+        type — to deliver pages and to keep the service secure and available. The legal basis is our
+        legitimate interest in operating a working, secure website (Art. 6(1)(f)). We do not use
+        these logs to build profiles or to identify individual visitors.
       </p>
 
       <h2>What we do not do</h2>
@@ -76,10 +91,10 @@ export default function PrivacyPage() {
 
       <h2>Who else can see it</h2>
       <p>
-        The organisers running Fabric Belgium can read messages sent to the shared mailbox.
-        Beyond that, our hosting and email providers process data on our behalf as processors,
-        under contract and on our instructions. We do not otherwise disclose your data, unless we
-        are legally required to.
+        The organisers running Fabric Belgium can read messages sent to the shared mailbox. Beyond
+        that, our hosting and email providers process data on our behalf as processors, under
+        contract and on our instructions. We do not otherwise disclose your data, unless we are
+        legally required to.
       </p>
       <p>
         Microsoft is a US-headquartered provider. Where personal data is transferred outside the
@@ -106,8 +121,8 @@ export default function PrivacyPage() {
       </ul>
       <p>
         Email <a href={`mailto:${site.email}`}>{site.email}</a> and we will respond within one
-        month. There is no charge. We may need to confirm who you are first, so that we do not
-        hand your data to somebody else.
+        month. There is no charge. We may need to confirm who you are first, so that we do not hand
+        your data to somebody else.
       </p>
       <p>
         If you are not happy with how we have handled it, you can complain to the Belgian
@@ -122,16 +137,16 @@ export default function PrivacyPage() {
       <h2>Other sites we link to</h2>
       <p>
         Event registration, ticketing, slide downloads and our LinkedIn page are hosted elsewhere.
-        Once you follow one of those links you are on someone else&rsquo;s site, under their
-        privacy policy and their cookies — not ours. The{" "}
-        <Link href="/cookies">cookie statement</Link> lists which ones.
+        Once you follow one of those links you are on someone else&rsquo;s site, under their privacy
+        policy and their cookies — not ours. The <Link href="/cookies">cookie statement</Link> lists
+        which ones.
       </p>
 
       <h2>Changes</h2>
       <p>
         If we change how we handle personal data, we will update this page and the date at the top
-        of it. If a change is significant — new tracking, say, or a new recipient of your data —
-        we will ask for your consent first where the law requires it.
+        of it. If a change is significant — new tracking, say, or a new recipient of your data — we
+        will ask for your consent first where the law requires it.
       </p>
     </LegalPage>
   );

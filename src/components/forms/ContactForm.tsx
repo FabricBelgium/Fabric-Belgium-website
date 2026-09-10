@@ -3,28 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/common/Button";
+import { MicrosoftFormEmbed } from "@/components/forms/MicrosoftFormEmbed";
 import { site } from "@/lib/site";
 
-type SubmitState = "idle" | "submitting" | "success" | "handoff" | "error";
+type SubmitState = "idle" | "handoff";
 
 /**
- * Submits to a Power Automate / Logic App HTTP trigger in the Fabric Belgium
- * Microsoft tenant, which sends the enquiry on to `site.email` through Outlook.
- * Deliberately not HubSpot and not a third-party form service: nobody outside
- * the tenant should hold enquiry data.
+ * Two shapes, chosen at build time by whether the Microsoft Form exists yet.
  *
- * The URL is a build-time public value — `NEXT_PUBLIC_*` is inlined into the
- * client bundle, and the trigger's own `sig` query parameter travels with it.
- * That is inherent to posting from a static page: treat the URL as public, keep
- * the flow's only action "email the team", and rotate it from the flow if it
- * ever attracts spam. The honeypot below drops the cheapest bots.
+ * With `site.contactFormUrl` set, this renders the click-to-load
+ * Microsoft Forms embed; a Power Automate flow on the free Microsoft 365 seeded
+ * licence then emails each response to `site.email`. See
+ * docs/contact-form-flow.md.
  *
- * With no endpoint configured the form hands off to the visitor's own mail
- * client instead of failing, so an enquiry is never silently swallowed while
- * the flow is still being set up.
+ * Without it, the hand-built form below hands off to the visitor's own mail
+ * client. That is the honest fallback for a static site: GitHub Pages cannot
+ * run code, so nothing on this page can send mail by itself, and pretending a
+ * submission succeeded would lose enquiries silently.
+ *
+ * Deliberately not HubSpot (the only portal available belongs to another
+ * company) and deliberately no third-party form service (the cookie statement
+ * promises no third-party scripts, and the privacy notice promises the message
+ * goes to the team mailbox and nowhere else).
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? "";
-
 const FIELD_CLASSES =
   "w-full rounded-button border border-surface-border bg-surface px-4 py-3 text-sm text-text " +
   "placeholder:text-text-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200";
@@ -36,7 +37,7 @@ interface ContactFormProps {
   defaultSubject?: string;
 }
 
-/** Builds the mailto: used both as the no-endpoint path and the failure path. */
+/** Builds the mailto: handed to the visitor when no Microsoft Form is configured. */
 function mailtoFor(payload: Record<string, string>) {
   const subject = payload.subject?.trim() || "Website enquiry";
   const body = [
@@ -51,55 +52,15 @@ function mailtoFor(payload: Record<string, string>) {
 export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
   const [state, setState] = useState<SubmitState>("idle");
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    // Captured before the await: React nulls out currentTarget once the
-    // synthetic event has been handled.
-    const form = event.currentTarget;
-    const payload = Object.fromEntries(new FormData(form)) as Record<string, string>;
-
-    // Honeypot: a real person never fills a field they cannot see. Report
-    // success rather than an error so a bot learns nothing from the response.
-    if (payload.website) {
-      setState("success");
-      form.reset();
-      return;
-    }
-
-    if (!ENDPOINT) {
-      window.location.href = mailtoFor(payload);
-      setState("handoff");
-      return;
-    }
-
-    setState("submitting");
-    try {
-      const response = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, sentFrom: site.url }),
-      });
-      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-      setState("success");
-      form.reset();
-    } catch {
-      setState("error");
-    }
+  if (site.contactFormUrl) {
+    return <MicrosoftFormEmbed url={site.contactFormUrl} />;
   }
 
-  if (state === "success") {
-    return (
-      <div
-        role="status"
-        className="rounded-card border border-brand-200 bg-brand-50 p-8 text-center"
-      >
-        <h3 className="text-lg">Message sent</h3>
-        <p className="mt-2 text-sm normal-case tracking-normal text-text-secondary">
-          We read everything that comes in and will get back to you at the address you gave us.
-        </p>
-      </div>
-    );
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const payload = Object.fromEntries(new FormData(event.currentTarget)) as Record<string, string>;
+    window.location.href = mailtoFor(payload);
+    setState("handoff");
   }
 
   if (state === "handoff") {
@@ -193,32 +154,6 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
       </div>
 
       {/*
-        Honeypot. Positioned off-screen rather than display:none, which some bots
-        skip, and kept out of the tab order and the accessibility tree so nobody
-        real ever lands on it.
-      */}
-      <div
-        className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
-        aria-hidden="true"
-      >
-        <label htmlFor="website">Leave this field empty</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
-
-      {state === "error" && (
-        <p
-          role="alert"
-          className="rounded-button border border-surface-border bg-surface-muted px-4 py-3 text-sm text-text"
-        >
-          Something went wrong sending that. Email us directly at{" "}
-          <a href={`mailto:${site.email}`} className="font-semibold underline underline-offset-2">
-            {site.email}
-          </a>
-          .
-        </p>
-      )}
-
-      {/*
         GDPR Art. 13 wants this at the point of collection, not only linked from
         the footer. Deliberately a notice and not a consent checkbox: we rely on
         legitimate interest to answer an enquiry someone chose to send, and a
@@ -235,8 +170,8 @@ export function ContactForm({ defaultSubject = "" }: ContactFormProps) {
         .
       </p>
 
-      <Button type="submit" size="lg" disabled={state === "submitting"}>
-        {state === "submitting" ? "Sending…" : "Send message"}
+      <Button type="submit" size="lg">
+        Send message
       </Button>
     </form>
   );

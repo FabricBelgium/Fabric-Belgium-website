@@ -26,9 +26,19 @@ export default function CookiesPage() {
       <h2>We set no cookies</h2>
       <p>
         Browsing this website stores nothing on your device. There are no cookies, no local or
-        session storage, no tracking pixels, no fingerprinting and no third-party scripts running
-        on these pages.
+        session storage, no tracking pixels, no fingerprinting and no third-party scripts running on
+        these pages.
       </p>
+      {site.contactFormUrl ? (
+        <p>
+          There is one thing that could set a cookie, and it does not run unless you ask it to. The
+          form on the contact page is hosted by Microsoft Forms, and we do not load it when the page
+          opens &mdash; you get a button instead. Press it and the form appears, at which point
+          Microsoft may set its own cookies under its own policy. Read the page, and nothing from
+          Microsoft is loaded and no cookie is set. That is why there is still no banner: we ask
+          before anything runs, which is exactly what we promise below.
+        </p>
+      ) : null}
       <p>
         Because nothing is stored and nothing is tracked, there is no consent for us to ask for.
         Under the EU ePrivacy rules a consent banner is required when a site stores or reads
@@ -38,9 +48,8 @@ export default function CookiesPage() {
 
       <h2>No analytics</h2>
       <p>
-        We run no analytics or visitor-statistics product — no Google Analytics, no heatmaps, no
-        A/B testing. We do not count you, and we could not tell you how many people read this
-        page.
+        We run no analytics or visitor-statistics product — no Google Analytics, no heatmaps, no A/B
+        testing. We do not count you, and we could not tell you how many people read this page.
       </p>
 
       <h2>Fonts are served from this site</h2>
@@ -75,15 +84,14 @@ export default function CookiesPage() {
       <p>
         Our host records ordinary request data, including IP addresses, to serve pages and keep the
         site secure. That happens on the server rather than on your device, and it is not used to
-        track you across sites. It is covered in the{" "}
-        <Link href="/privacy">privacy policy</Link>.
+        track you across sites. It is covered in the <Link href="/privacy">privacy policy</Link>.
       </p>
 
       <h2>If this changes</h2>
       <p>
         If we ever add something that needs a cookie, we will ask for your consent before it runs,
-        give you a way to refuse or withdraw it, and update this page. Adding it quietly and
-        showing you a banner afterwards is not something we intend to do.
+        give you a way to refuse or withdraw it, and update this page. Adding it quietly and showing
+        you a banner afterwards is not something we intend to do.
       </p>
       <p>
         Questions about any of this: <a href={`mailto:${site.email}`}>{site.email}</a>.

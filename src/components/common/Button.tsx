@@ -47,6 +47,8 @@ interface ButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   type?: "button" | "submit";
+  /** Passed straight to OriginButton, which already supports it. */
+  onClick?: React.MouseEventHandler<HTMLElement>;
   disabled?: boolean;
   className?: string;
 }
@@ -57,6 +59,7 @@ export function Button({
   variant = "default",
   size = "md",
   type = "button",
+  onClick,
   disabled = false,
   className = "",
 }: ButtonProps) {
@@ -66,6 +69,7 @@ export function Button({
     <OriginButton
       href={href}
       type={type}
+      onClick={onClick}
       disabled={disabled}
       fillClassName={v.fill}
       restTextClassName={v.rest}

@@ -48,9 +48,10 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Public by design — inlined into the client bundle. Held as a repo
-          # variable only to keep the flow's rotating `sig` out of git history.
-          NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+          # Public by design — inlined into the client bundle, and the Microsoft
+          # Form is an "anyone can respond" link anyway. See
+          # docs/contact-form-flow.md.
+          NEXT_PUBLIC_CONTACT_FORM_URL: ${{ vars.NEXT_PUBLIC_CONTACT_FORM_URL }}
           NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ vars.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
 
       - name: Upload artifact
