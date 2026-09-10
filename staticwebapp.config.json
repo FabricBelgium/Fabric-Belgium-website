@@ -1,0 +1,53 @@
+{
+  "routes": [
+    { "route": "/home", "redirect": "/", "statusCode": 301 },
+    { "route": "/contact-1", "redirect": "/contact", "statusCode": 301 },
+
+    { "route": "/events-old", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-1", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-2", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-3", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-4", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-5", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-6", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-7", "redirect": "/events", "statusCode": 301 },
+    { "route": "/events-4lnrt", "redirect": "/events", "statusCode": 301 },
+    { "route": "/power-bi-brussels-syntra", "redirect": "/events", "statusCode": 301 },
+
+    { "route": "/events-presentations", "redirect": "/events", "statusCode": 301 },
+    {
+      "route": "/events-presentations/project-one-f5w4d-n58tn",
+      "redirect": "/events",
+      "statusCode": 301
+    },
+    {
+      "route": "/events-presentations/project-two-ky966-ncnbf",
+      "redirect": "/events",
+      "statusCode": 301
+    },
+    {
+      "route": "/events-presentations/project-three-sng7y-ghp9n",
+      "redirect": "/events",
+      "statusCode": 301
+    },
+    {
+      "route": "/events-presentations/project-four-l3zw3-2wjgx",
+      "redirect": "/events",
+      "statusCode": 301
+    },
+    {
+      "route": "/events-presentations/project-five-748cx-jffbr",
+      "redirect": "/events",
+      "statusCode": 301
+    },
+    {
+      "route": "/events-presentations/project-six-6f87e-j24kl",
+      "redirect": "/events",
+      "statusCode": 301
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif,svg}", "/_next/*", "/api/*"]
+  }
+}
