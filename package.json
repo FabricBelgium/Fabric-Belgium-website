@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "publish:root": "next build && node scripts/copy-export-to-root.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
