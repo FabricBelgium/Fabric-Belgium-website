@@ -71,6 +71,28 @@ If the mail does not arrive, open the flow's **run history**: a failed "Get
 response details" almost always means the form in step 3 is not the same form as
 in step 2.
 
+## 2b. Where responses are stored
+
+Nothing extra to build: Microsoft Forms keeps every submission itself, in the
+form's **Responses** tab, as a table with a one-click **Export to Excel**. So
+there is a durable record even if the alert mail is deleted, missed, or the flow
+was broken at the time — which is the main thing the old `mailto:` fallback could
+not offer.
+
+That means the mail is an **alert**, not the only copy. Two consequences:
+
+- If the flow ever breaks, submissions are still being collected. Fix the flow
+  and the backlog is sitting in the Responses tab.
+- Someone has to clear old responses. The privacy notice promises contact
+  messages are kept for a stated period "and then deleted", and that promise now
+  covers the copy in Forms as well as the one in the mailbox. Deleting the mail
+  alone does not honour it.
+
+If "did anyone actually answer this?" becomes a problem, the flow can also post
+each enquiry to a Teams channel, raise a Planner task, or append a row to a
+shared Excel table — all standard connectors on the same free licence. Not set up
+today, because email alone was the ask.
+
 ## 3. Put the form on the site
 
 The site reads the form URL from a build-time variable. In **Settings → Secrets

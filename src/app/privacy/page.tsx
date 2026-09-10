@@ -69,11 +69,12 @@ export default function PrivacyPage() {
 
       <h3>Server logs</h3>
       <p>
-        This site is hosted on Microsoft Azure Static Web Apps. Like any web host, it processes
-        technical request data — including your IP address, the page requested, and your browser
-        type — to deliver pages and to keep the service secure and available. The legal basis is our
-        legitimate interest in operating a working, secure website (Art. 6(1)(f)). We do not use
-        these logs to build profiles or to identify individual visitors.
+        This site is hosted on GitHub Pages, a service of GitHub, Inc., a Microsoft company. Like
+        any web host, it processes technical request data — including your IP address, the page
+        requested, and your browser type — to deliver pages and to keep the service secure and
+        available. The legal basis is our legitimate interest in operating a working, secure website
+        (Art. 6(1)(f)). We do not use these logs to build profiles or to identify individual
+        visitors.
       </p>
 
       <h2>What we do not do</h2>
@@ -97,9 +98,9 @@ export default function PrivacyPage() {
         legally required to.
       </p>
       <p>
-        Microsoft is a US-headquartered provider. Where personal data is transferred outside the
-        European Economic Area, it is covered by the safeguards Microsoft offers for its cloud
-        services, including the EU Standard Contractual Clauses.
+        Microsoft and GitHub are US-headquartered providers. Where personal data is transferred
+        outside the European Economic Area, it is covered by the safeguards those providers offer
+        for their cloud services, including the EU Standard Contractual Clauses.
       </p>
 
       <h2>How long we keep it</h2>
