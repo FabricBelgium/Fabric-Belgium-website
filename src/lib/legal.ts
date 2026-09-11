@@ -26,11 +26,11 @@ export interface LegalEntity {
 }
 
 export const legalEntity: LegalEntity = {
-  name: null,
-  address: null,
-  enterpriseNumber: null,
-  vatNumber: null,
-  contactRetention: null,
+  name: "Fabric Belgium VZW",
+  address: "Doorniksesteenweg 133, 8580 Avelgem, Belgium",
+  enterpriseNumber: "1019.431.693",
+  vatNumber: "BE1019.431.693",
+  contactRetention: "12 months",
 };
 
 /** Fields that must be filled before these pages are fit to publish. */
@@ -41,7 +41,7 @@ export const unconfirmedFields = REQUIRED_FIELDS.filter((field) => legalEntity[f
 export const hasUnconfirmedDetails = unconfirmedFields.length > 0;
 
 /** Date these texts were last substantively changed. Update when you edit them. */
-export const lastUpdated = "2026-09-08";
+export const lastUpdated = "2026-09-11";
 
 /**
  * The Belgian supervisory authority. A privacy notice has to name the
