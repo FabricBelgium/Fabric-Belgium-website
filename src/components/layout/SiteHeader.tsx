@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,24 +10,46 @@ import { navigation, site } from "@/lib/site";
 /**
  * Two modes, from the 1.txt demo's header:
  *
- * - **overlay** (homepage): transparent, sitting inside the hero shader panel,
- *   pill-shaped nav links that fill on hover, white text.
- * - **solid** (every other page): the same layout on the cream surface, since
- *   those pages have no shader to sit on.
+ * - **overlay** (homepage, unscrolled): transparent, sitting on the hero
+ *   shader panel, pill-shaped nav links that fill on hover, white text.
+ * - **solid** (every other page, and the homepage as soon as it scrolls):
+ *   the same layout on the cream surface.
  *
- * The demo put its header inside the shader container. Here it stays in the
- * root layout and positions itself absolutely instead, so one component keeps
- * serving every route.
+ * The homepage variant is `position: fixed` rather than the document-flow
+ * `absolute` it used to be, and flips to solid the moment `scrollY > 0`.
+ * Previously it stayed `absolute` and transparent for the entire pinned
+ * scroll story below it, which depends on the shader/GSAP pin rendering
+ * correctly underneath to stay legible — on iOS Safari that combination
+ * (WebGL canvas + scroll-linked pin) can fail silently, leaving white text
+ * on the plain white page background with no fixed anchor, i.e. an
+ * invisible menu that scrolls away instead of staying put. Fixed position +
+ * solid-on-scroll makes the header legible and reachable regardless of
+ * whether the hero animation itself renders.
  */
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isOverlay = pathname === "/";
+  const isHome = pathname === "/";
+  const isOverlay = isHome && !scrolled;
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
-  const shell = isOverlay
-    ? "absolute inset-x-0 top-0 z-50 bg-transparent"
+  const shell = isHome
+    ? `fixed inset-x-0 top-0 z-50 transition-colors ${
+        isOverlay
+          ? "bg-transparent"
+          : "border-b border-surface-border/70 bg-surface/90 backdrop-blur"
+      }`
     : "sticky top-0 z-50 border-b border-surface-border/70 bg-surface/90 backdrop-blur";
 
   const wordmark = isOverlay ? "text-text-inverse" : "text-text";
