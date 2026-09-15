@@ -97,14 +97,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
           <ShaderBackground minHeight="100%" />
         </div>
 
-        {/* mt-16 (not the panel's own padding) clears the fixed SiteHeader:
-            adding it here, rather than raising the section's padding-top,
-            keeps this panel's total box at exactly min-h-[100svh] — the
-            GSAP pin math in story-scroll.tsx measures section heights on
-            mount, and a taller panel 1 opened a blank gap in the pinned
-            scroll (panels are clipped to viewport height by design). The
-            `my-auto` block below absorbs the difference instead. */}
-        <p className={`${KICKER} mt-16`}>01 / Welcome to Fabric Belgium</p>
+        <p className={KICKER}>01 / Welcome to Fabric Belgium</p>
         <Rule tone="light" />
 
         {/* One flex child, not four: the panel's inner container is
