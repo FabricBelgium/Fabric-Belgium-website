@@ -1,5 +1,5 @@
 ---
-title: "Fabric Belgium Autumn event"
+title: "Community Autumn Event"
 date: 2026-10-20
 status: upcoming
 startTime: "17:30"
