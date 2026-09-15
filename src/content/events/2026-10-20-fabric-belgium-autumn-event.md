@@ -9,6 +9,7 @@ venue:
   address: "Noorderlaan 139"
   city: "2030 Antwerp"
 host: "Fabric Belgium"
+registerUrl: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U1hZqJVQDkuuH5-YTxEivPyefcS5CXFGvfTAx9KA0UVUMTJZTUIzRFVMTUpKRExXRzYxTFk1Wk5MTC4u"
 agenda:
   - time: "17:30"
     title: "Welcome"
