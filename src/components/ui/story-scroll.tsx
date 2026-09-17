@@ -16,6 +16,8 @@ export interface FlowSectionProps {
   style?: React.CSSProperties;
   children: React.ReactNode;
   "aria-label"?: string;
+  /** Ground this panel gives the floating SiteHeader: "dark" turns its text white. */
+  headerTone: "dark" | "light";
 }
 
 export const FlowSection: React.FC<FlowSectionProps> = ({
@@ -23,9 +25,11 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
   style = {},
   children,
   "aria-label": ariaLabel,
+  headerTone,
 }) => (
   <section
     data-flow-section
+    data-header-tone={headerTone}
     aria-label={ariaLabel}
     // 100svh, not the snippet's min-h-screen: on mobile `vh` is the *largest*
     // viewport, so with the browser chrome showing, every panel would be taller
@@ -35,7 +39,9 @@ export const FlowSection: React.FC<FlowSectionProps> = ({
     <div
       data-flow-inner
       className={cx(
-        "flow-art-container relative flex min-h-[100svh] w-full flex-col justify-between gap-6 px-[6vw] pb-[6vw] pt-[clamp(2rem,8vw,4vw)]",
+        // The extra 6rem of top padding clears SiteHeader (fixed, h-24), which
+        // floats transparently over every panel.
+        "flow-art-container relative flex min-h-[100svh] w-full flex-col justify-between gap-6 px-[6vw] pb-[6vw] pt-[calc(6rem+clamp(2rem,8vw,4vw))]",
         "will-change-transform",
       )}
       style={{ transformOrigin: "bottom left", ...style }}
