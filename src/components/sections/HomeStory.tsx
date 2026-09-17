@@ -88,6 +88,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
       {/* 01 — Landing */}
       <FlowSection
         aria-label="Fabric Belgium"
+        headerTone="dark"
         style={{ backgroundColor: "#1D1C1C", color: "#FCFAFA" }}
       >
         {/* Wrapped rather than given `absolute` via className: ShaderBackground's
@@ -132,7 +133,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
       </FlowSection>
 
       {/* 02 — Events */}
-      <FlowSection aria-label="Events" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
+      <FlowSection aria-label="Events" headerTone="light" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
         <p className={KICKER}>02 / Events</p>
         <Rule tone="dark" />
 
@@ -184,6 +185,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
       {/* 03 — Flagship */}
       <FlowSection
         aria-label="Fabric Winterfest"
+        headerTone="dark"
         style={{ backgroundColor: "#1D1C1C", color: "#FCFAFA" }}
       >
         <p className={KICKER}>03 / Fabric Winterfest</p>
@@ -247,7 +249,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
       </FlowSection>
 
       {/* 04 — Partners */}
-      <FlowSection aria-label="Partners" style={{ backgroundColor: "#155537", color: "#FCFAFA" }}>
+      <FlowSection aria-label="Partners" headerTone="dark" style={{ backgroundColor: "#155537", color: "#FCFAFA" }}>
         <p className={KICKER}>04 / Partners</p>
         <Rule tone="light" />
 
@@ -283,7 +285,7 @@ export function HomeStory({ upcoming, partners }: HomeStoryProps) {
 
       {/* 05 — Contact. Last panel: the one FlowArt leaves unpinned, so it is
           the only one free to be taller than the viewport. */}
-      <FlowSection aria-label="Contact" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
+      <FlowSection aria-label="Contact" headerTone="light" style={{ backgroundColor: "#FCFAFA", color: "#1D1C1C" }}>
         <p className={KICKER}>05 / Contact</p>
         <Rule tone="dark" />
 
