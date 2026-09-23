@@ -19,8 +19,12 @@ agenda:
     title: "Sessions"
     description: "Runs until 21:00"
 speakers:
-  - name: "TBD"
+  - name: "Customer case"
+    talk: "Fabric roadmap at Provincie Antwerpen"
+  - name: "Technical session"
+    talk: "FabCon Recap"
 ---
 
-Fabric Belgium's autumn evening session: talks, demos and networking with the
-Belgian Microsoft Fabric community. Speakers to be announced.
+Fabric Belgium's autumn evening session: two talks and networking with the
+Belgian Microsoft Fabric community. Provincie Antwerpen shares its Fabric
+roadmap, followed by a technical recap of FabCon.
