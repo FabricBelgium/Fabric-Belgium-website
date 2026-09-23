@@ -1,7 +1,19 @@
 [
   {
+    "name": "ACA IT-Solutions",
+    "logo": "/images/partners/aca-it.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
     "name": "AE",
     "logo": "/images/partners/ae.png",
+    "website": "",
+    "tier": "partner"
+  },
+  {
+    "name": "Arrow ECS",
+    "logo": "/images/partners/arrow-ecs.png",
     "website": "",
     "tier": "partner"
   },
@@ -18,26 +30,8 @@
     "tier": "partner"
   },
   {
-    "name": "Cloubis",
-    "logo": "/images/partners/cloubis.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
     "name": "Codit",
     "logo": "/images/partners/codit.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
-    "name": "ConXioN",
-    "logo": "/images/partners/conxion.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
-    "name": "Datashift",
-    "logo": "/images/partners/datashift.png",
     "website": "",
     "tier": "partner"
   },
@@ -66,8 +60,8 @@
     "tier": "partner"
   },
   {
-    "name": "Kohera",
-    "logo": "/images/partners/kohera.png",
+    "name": "Laco",
+    "logo": "/images/partners/laco.png",
     "website": "",
     "tier": "partner"
   },
@@ -84,12 +78,6 @@
     "tier": "partner"
   },
   {
-    "name": "Savaco",
-    "logo": "/images/partners/savaco.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
     "name": "Sirus",
     "logo": "/images/partners/sirus.png",
     "website": "",
@@ -98,18 +86,6 @@
   {
     "name": "Sparkle Data",
     "logo": "/images/partners/sparkle-data.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
-    "name": "Trustteam",
-    "logo": "/images/partners/trustteam.png",
-    "website": "",
-    "tier": "partner"
-  },
-  {
-    "name": "U2U",
-    "logo": "/images/partners/u2u.png",
     "website": "",
     "tier": "partner"
   },
