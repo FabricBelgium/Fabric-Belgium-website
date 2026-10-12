@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { flushSync } from "react-dom";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/common/Button";
+import { requestFlowRelayout } from "@/components/ui/flow-relayout";
 import type { FabricEvent } from "@/lib/content/events";
 import { formatEventDate } from "@/lib/format";
 
@@ -28,12 +28,10 @@ function hasDetail(event: FabricEvent): boolean {
  * The upcoming events on the homepage card, each row expandable for the
  * detail that does not belong in a one-line summary.
  *
- * This list lives inside a pinned GSAP panel, which is clipped at the height
- * ScrollTrigger measured. Opening a row makes the panel taller after that
- * measurement, so `toggle` re-measures — otherwise the detail past the old
- * bottom, Register button included, is clipped with no way to scroll to it.
- * Only one row opens at a time, which keeps the panel to "collapsed rows +
- * the tallest single detail block".
+ * This list lives inside a pinned GSAP panel, which only grows to fit an open
+ * row because each toggle asks FlowArt to re-measure it (requestFlowRelayout).
+ * Only one row opens at a time, which bounds that growth to "collapsed rows +
+ * the tallest single detail block" and keeps the panel close to a screen high.
  */
 export function UpcomingEventsList({
   events,
@@ -42,25 +40,6 @@ export function UpcomingEventsList({
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   if (events.length === 0) return null;
-
-  function toggle(slug: string, row: HTMLElement) {
-    const pinTrigger = ScrollTrigger.getAll().find((trigger) => trigger.pin?.contains(row));
-    const startBefore = pinTrigger?.start ?? Infinity;
-
-    // Commit the new height to the DOM first, so the refresh measures it.
-    flushSync(() => setOpenSlug((current) => (current === slug ? null : slug)));
-    ScrollTrigger.refresh();
-
-    // A visitor already scrolled past the pin start has the next panel sliding
-    // over this one. Moving the pin start would make the panel jump under the
-    // cursor on open, or leave it half covered on close, so take them back to
-    // the earlier of the two starts: the panel holds still on open and comes
-    // fully back into view on close.
-    if (pinTrigger) {
-      const settle = Math.min(startBefore, pinTrigger.start);
-      if (window.scrollY > settle) window.scrollTo(0, settle);
-    }
-  }
 
   return (
     <ul className="divide-y divide-black/10 border-y border-black/10">
@@ -101,7 +80,12 @@ export function UpcomingEventsList({
             {expandable ? (
               <button
                 type="button"
-                onClick={(e) => toggle(event.slug, e.currentTarget)}
+                onClick={(e) => {
+                  // Committed synchronously, so the panel is re-measured
+                  // before the browser paints the row opened or closed.
+                  flushSync(() => setOpenSlug(isOpen ? null : event.slug));
+                  requestFlowRelayout(e.currentTarget);
+                }}
                 aria-expanded={isOpen}
                 aria-controls={`event-${event.slug}`}
                 className="flex w-full items-start justify-between gap-4 py-3 text-left transition-opacity hover:opacity-70"
@@ -143,10 +127,10 @@ export function UpcomingEventsList({
                 )}
 
                 {/*
-                  Hidden on the smallest screens to keep an expanded row short
-                  there; the full agenda is on /events. (It was first hidden
-                  because the pinned panel clipped what came after it — `toggle`
-                  now re-measures the pin, so that is no longer the reason.)
+                  Hidden on the smallest screens on purpose, to keep an open
+                  row short on a phone: the panel grows to fit it, but every
+                  extra line pushes the Register button further down. The full
+                  agenda is on /events.
                 */}
                 {event.agenda.length > 0 && (
                   <ol className="mt-3 hidden space-y-1 sm:block">
