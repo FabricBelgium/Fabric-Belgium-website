@@ -12,6 +12,11 @@ export const metadata: Metadata = {
 const OUTBOUND = [
   { name: "Microsoft Forms", what: "event registration", href: "https://forms.office.com" },
   { name: "Weeztix", what: "Winterfest ticketing", href: "https://weeztix.shop" },
+  {
+    name: "Mailchimp",
+    what: "the page that opens when you subscribe to the newsletter",
+    href: "https://mailchimp.com",
+  },
   { name: "LinkedIn", what: "our community page", href: site.linkedin },
   { name: "Fabric Winterfest", what: "the Winterfest site", href: site.winterfestUrl },
   { name: "pdfhost.io", what: "speaker slide downloads", href: "https://pdfhost.io" },

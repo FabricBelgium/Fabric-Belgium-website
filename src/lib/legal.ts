@@ -41,7 +41,7 @@ export const unconfirmedFields = REQUIRED_FIELDS.filter((field) => legalEntity[f
 export const hasUnconfirmedDetails = unconfirmedFields.length > 0;
 
 /** Date these texts were last substantively changed. Update when you edit them. */
-export const lastUpdated = "2026-09-11";
+export const lastUpdated = "2026-10-12";
 
 /**
  * The Belgian supervisory authority. A privacy notice has to name the

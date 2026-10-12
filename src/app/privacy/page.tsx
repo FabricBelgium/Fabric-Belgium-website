@@ -67,6 +67,20 @@ export default function PrivacyPage() {
         instead of using the form.
       </p>
 
+      <h3>Newsletter</h3>
+      <p>
+        If you subscribe to our newsletter, we collect your email address. The signup form sends it
+        straight to Mailchimp, a service of Intuit Inc., which keeps our mailing list and sends the
+        newsletter on our behalf. We use your address only to email you about Fabric Belgium events
+        and community news. Mailchimp may record whether our emails are opened and which links in
+        them are clicked.
+      </p>
+      <p>
+        The legal basis is your consent (GDPR Art. 6(1)(a)). You can withdraw it at any time with
+        the unsubscribe link in every email, or by writing to{" "}
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+
       <h3>Server logs</h3>
       <p>
         This site is hosted on GitHub Pages, a service of GitHub, Inc., a Microsoft company. Like
@@ -87,28 +101,30 @@ export default function PrivacyPage() {
           No cookies or similar tracking technologies — see the{" "}
           <Link href="/cookies">cookie statement</Link>.
         </li>
-        <li>No newsletter or marketing mail unless you explicitly ask to be added.</li>
+        <li>No newsletter or marketing mail unless you subscribe yourself.</li>
       </ul>
 
       <h2>Who else can see it</h2>
       <p>
-        The organisers running Fabric Belgium can read messages sent to the shared mailbox. Beyond
-        that, our hosting and email providers process data on our behalf as processors, under
-        contract and on our instructions. We do not otherwise disclose your data, unless we are
-        legally required to.
+        The organisers running Fabric Belgium can read messages sent to the shared mailbox and see
+        the newsletter list. Beyond that, our hosting and email providers, and Mailchimp for the
+        newsletter, process data on our behalf as processors, under contract and on our
+        instructions. We do not otherwise disclose your data, unless we are legally required to.
       </p>
       <p>
-        Microsoft and GitHub are US-headquartered providers. Where personal data is transferred
-        outside the European Economic Area, it is covered by the safeguards those providers offer
-        for their cloud services, including the EU Standard Contractual Clauses.
+        Microsoft, GitHub and Mailchimp (Intuit) are US-headquartered providers. Where personal data
+        is transferred outside the European Economic Area, it is covered by the safeguards those
+        providers offer for their cloud services, including the EU Standard Contractual Clauses.
       </p>
 
       <h2>How long we keep it</h2>
       <p>
         Contact messages are kept for{" "}
         <Detail value={legalEntity.contactRetention} label="retention period" /> and then deleted.
-        We keep something longer only where we have to — for example an agreement with a partner,
-        which is kept for as long as the law requires.
+        Newsletter addresses are kept for as long as you stay subscribed. Once you unsubscribe, your
+        address stays on the list marked as unsubscribed, so that you are not emailed again; ask us
+        and we will delete it entirely. We keep something longer only where we have to — for example
+        an agreement with a partner, which is kept for as long as the law requires.
       </p>
 
       <h2>Your rights</h2>
