@@ -19,12 +19,25 @@ agenda:
     title: "Sessions"
     description: "Runs until 21:00"
 speakers:
-  - name: "Customer case"
-    talk: "Fabric roadmap at Provincie Antwerpen"
-  - name: "Technical session"
-    talk: "FabCon Recap"
+  - name: "Bart Voorspools & Wouter Van den Bogaert"
+    company: "Provincie Antwerpen & Xylos"
+    talk: "Fabric Roadmap at Provincie Antwerpen"
+    abstract: >-
+      How is Provincie Antwerpen transforming its data warehousing and
+      integration architecture using Microsoft Fabric? We will guide you
+      through the journey that we started in 2024 and share our experience on
+      successes, inconveniences and where we are heading to.
+  - name: "Peter Verrykt, Max Milan, Robbe Profeta & Sam De Waegeneer"
+    company: "Xylos"
+    talk: "FabCon 2026 Barcelona recap"
+    abstract: >-
+      During FabCon 2026 in Barcelona a lot of new features and product
+      improvements were announced. We listened carefully and will present you
+      the highlights of these announcements. Prepare for a lot of highly
+      anticipated improvements and cool, new stuff like Rayfin Apps and
+      Project Osmos.
 ---
 
 Fabric Belgium's autumn evening session: two talks and networking with the
 Belgian Microsoft Fabric community. Provincie Antwerpen shares its Fabric
-roadmap, followed by a technical recap of FabCon.
+journey, followed by Xylos' recap of FabCon 2026 in Barcelona.
