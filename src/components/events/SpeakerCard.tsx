@@ -50,9 +50,14 @@ export function SpeakerCard({ speaker, compact = false }: SpeakerCardProps) {
         {speaker.company && (
           <p className="text-xs normal-case tracking-normal text-text-muted">{speaker.company}</p>
         )}
-        <p className="mt-2 text-sm normal-case leading-relaxed tracking-normal text-text-secondary">
+        <p className="mt-2 text-sm font-semibold normal-case leading-relaxed tracking-normal text-text">
           {speaker.talk}
         </p>
+        {speaker.abstract && (
+          <p className="mt-2 text-sm normal-case leading-relaxed tracking-normal text-text-secondary">
+            {speaker.abstract}
+          </p>
+        )}
         {speaker.slidesUrl && (
           <a
             href={speaker.slidesUrl}

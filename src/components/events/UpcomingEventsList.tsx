@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { flushSync } from "react-dom";
 import { Button } from "@/components/common/Button";
+import { requestFlowRelayout } from "@/components/ui/flow-relayout";
 import type { FabricEvent } from "@/lib/content/events";
 import { formatEventDate } from "@/lib/format";
 
@@ -26,11 +28,10 @@ function hasDetail(event: FabricEvent): boolean {
  * The upcoming events on the homepage card, each row expandable for the
  * detail that does not belong in a one-line summary.
  *
- * Only one row opens at a time, and that is a hard requirement rather than a
- * preference: this list lives inside a pinned GSAP panel, which is clipped at
- * viewport height. Two open rows would push the last one into space the
- * visitor cannot scroll to. One-at-a-time bounds the panel's height to
- * "collapsed rows + the tallest single detail block".
+ * This list lives inside a pinned GSAP panel, which only grows to fit an open
+ * row because each toggle asks FlowArt to re-measure it (requestFlowRelayout).
+ * Only one row opens at a time, which bounds that growth to "collapsed rows +
+ * the tallest single detail block" and keeps the panel close to a screen high.
  */
 export function UpcomingEventsList({
   events,
@@ -79,7 +80,12 @@ export function UpcomingEventsList({
             {expandable ? (
               <button
                 type="button"
-                onClick={() => setOpenSlug(isOpen ? null : event.slug)}
+                onClick={(e) => {
+                  // Committed synchronously, so the panel is re-measured
+                  // before the browser paints the row opened or closed.
+                  flushSync(() => setOpenSlug(isOpen ? null : event.slug));
+                  requestFlowRelayout(e.currentTarget);
+                }}
                 aria-expanded={isOpen}
                 aria-controls={`event-${event.slug}`}
                 className="flex w-full items-start justify-between gap-4 py-3 text-left transition-opacity hover:opacity-70"
@@ -121,11 +127,10 @@ export function UpcomingEventsList({
                 )}
 
                 {/*
-                  Hidden on the smallest screens on purpose. This list sits in
-                  a pinned panel: with the agenda shown, an expanded Winterfest
-                  row ran 877px against a 780px viewport, and the ~97px tail —
-                  including the Register button — was clipped with no way to
-                  scroll to it. The full agenda is on /events.
+                  Hidden on the smallest screens on purpose, to keep an open
+                  row short on a phone: the panel grows to fit it, but every
+                  extra line pushes the Register button further down. The full
+                  agenda is on /events.
                 */}
                 {event.agenda.length > 0 && (
                   <ol className="mt-3 hidden space-y-1 sm:block">

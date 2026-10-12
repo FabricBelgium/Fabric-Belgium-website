@@ -13,6 +13,8 @@ export interface Speaker {
   name: string;
   talk: string;
   company?: string;
+  /** Session description — shown on /events only, not in the homepage list */
+  abstract?: string;
   /** Link to the slide deck, added after the event */
   slidesUrl?: string;
 }
@@ -78,6 +80,7 @@ function parseSpeakers(value: unknown): Speaker[] {
         name,
         talk: asString(row.talk) ?? "Session to be announced",
         company: asString(row.company),
+        abstract: asString(row.abstract),
         slidesUrl: asString(row.slidesUrl),
       },
     ];
