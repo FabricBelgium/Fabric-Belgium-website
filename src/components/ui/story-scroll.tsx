@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { FLOW_RELAYOUT_EVENT } from "@/components/ui/flow-relayout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,6 +99,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
       if (sections.length === 0) return;
 
       const triggers: ScrollTrigger[] = [];
+      const pins = new Map<HTMLElement, ScrollTrigger>();
 
       sections.forEach((section, i) => {
         gsap.set(section, { zIndex: i + 1 });
@@ -121,21 +123,62 @@ const FlowArt: React.FC<FlowArtProps> = ({
         }
 
         if (i < sections.length - 1) {
-          triggers.push(
-            ScrollTrigger.create({
-              trigger: section,
-              start: "bottom bottom",
-              end: "bottom top",
-              pin: true,
-              pinSpacing: false,
-            }),
-          );
+          const pin = ScrollTrigger.create({
+            trigger: section,
+            start: "bottom bottom",
+            end: "bottom top",
+            pin: true,
+            pinSpacing: false,
+          });
+          triggers.push(pin);
+          pins.set(section, pin);
         }
       });
 
+      // A pin locks its section to the height it measured, inline, and the
+      // section is overflow-hidden. GSAP then measures that locked height again
+      // on every later refresh, so a panel could never grow: an event row
+      // expanded on the homepage card was cut off with no way to scroll to it.
+      // Dropping the lock before each refresh lets GSAP see the content.
+      const unlockHeights = () => {
+        pins.forEach((_, section) => {
+          section.style.removeProperty("height");
+          section.style.removeProperty("max-height");
+        });
+      };
+      ScrollTrigger.addEventListener("refreshInit", unlockHeights);
+
       ScrollTrigger.refresh();
 
+      // See requestFlowRelayout. Runs before paint, so the panel never shows a
+      // frame at its old height (on collapse, that frame flashed the panel
+      // underneath through the space the content had left).
+      const relayout = (event: Event) => {
+        const section = (event.target as Element).closest<HTMLElement>("[data-flow-section]");
+        const pin = section && pins.get(section);
+        // The last panel is not pinned, so it grows like any page content.
+        if (!section || !pin) return;
+
+        // Refresh moves the pin start, so the same scroll offset would show the
+        // panel somewhere else. Keep it where the visitor is looking: pins
+        // start at "bottom bottom", which puts the in-flow top at
+        // `start + innerHeight - height`. Capped at the pin start, because past
+        // it the next panel is already sliding over this one.
+        const top = section.getBoundingClientRect().top;
+        ScrollTrigger.refresh();
+        const inFlowTop = pin.start + window.innerHeight - section.offsetHeight;
+        const target = Math.min(inFlowTop - top, pin.start);
+        if (Math.abs(target - window.scrollY) > 1) {
+          window.scrollTo({ top: target, behavior: "instant" });
+          ScrollTrigger.update();
+        }
+      };
+      const container = containerRef.current;
+      container.addEventListener(FLOW_RELAYOUT_EVENT, relayout);
+
       return () => {
+        container.removeEventListener(FLOW_RELAYOUT_EVENT, relayout);
+        ScrollTrigger.removeEventListener("refreshInit", unlockHeights);
         triggers.forEach((t) => t.kill());
       };
     },
