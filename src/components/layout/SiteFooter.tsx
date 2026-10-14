@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
 import { legalNavigation } from "@/lib/legal";
 import { navigation, site } from "@/lib/site";
 
@@ -10,7 +11,7 @@ import { navigation, site } from "@/lib/site";
 export function SiteFooter() {
   return (
     <footer className="bg-surface text-text">
-      <div className="container-site grid gap-10 py-16 md:grid-cols-3">
+      <div className="container-site grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
             <Image
@@ -85,6 +86,11 @@ export function SiteFooter() {
               </a>
             </li>
           </ul>
+        </div>
+
+        <div>
+          <h2 className="text-xs text-text-muted">Newsletter</h2>
+          <NewsletterSignup />
         </div>
       </div>
 
