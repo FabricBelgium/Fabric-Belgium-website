@@ -44,6 +44,8 @@ export interface FabricEvent {
   venue?: EventVenue;
   host?: string;
   registerUrl?: string;
+  /** The event's own site, linked as "More info? Visit our website" on /events */
+  websiteUrl?: string;
   agenda: AgendaItem[];
   speakers: Speaker[];
   /** Body copy below the frontmatter (markdown, rendered as plain paragraphs) */
@@ -130,6 +132,7 @@ export function getAllEvents(): FabricEvent[] {
         venue: parseVenue(data.venue),
         host: asString(data.host),
         registerUrl: asString(data.registerUrl),
+        websiteUrl: asString(data.websiteUrl),
         agenda: parseAgenda(data.agenda),
         speakers: parseSpeakers(data.speakers),
         content: content.trim(),

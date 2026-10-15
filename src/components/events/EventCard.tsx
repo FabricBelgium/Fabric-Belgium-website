@@ -71,7 +71,7 @@ export function EventCard({ event }: EventCardProps) {
             </p>
           )}
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             {event.registerUrl ? (
               <Button href={event.registerUrl} size="lg">
                 Register
@@ -79,6 +79,19 @@ export function EventCard({ event }: EventCardProps) {
             ) : (
               <p className="text-sm normal-case tracking-normal text-text-muted">
                 Registration opens closer to the date.
+              </p>
+            )}
+            {event.websiteUrl && (
+              <p className="text-sm normal-case tracking-normal text-text-secondary">
+                More info?{" "}
+                <a
+                  href={event.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold underline underline-offset-2 hover:text-brand-500"
+                >
+                  Visit our website
+                </a>
               </p>
             )}
           </div>

@@ -11,6 +11,7 @@ venue:
   url: "https://fabricwinterfest.be/"
 host: "Fabric Belgium"
 registerUrl: "https://weeztix.shop/xq3nq9kq"
+websiteUrl: "https://fabricwinterfest.be/"
 agenda:
   - time: "08:00"
     title: "Doors open"
