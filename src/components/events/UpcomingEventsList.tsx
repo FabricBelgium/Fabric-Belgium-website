@@ -19,6 +19,7 @@ function hasDetail(event: FabricEvent): boolean {
     event.agenda.length ||
     event.speakers.length ||
     event.venue?.address ||
+    event.venue?.directions ||
     event.registerUrl ||
     event.host,
   );
@@ -117,6 +118,12 @@ export function UpcomingEventsList({
                     {[event.venue.name, event.venue.address, event.venue.city]
                       .filter(Boolean)
                       .join(", ")}
+                  </p>
+                )}
+
+                {event.venue?.directions && (
+                  <p className="mt-1 text-sm normal-case leading-relaxed tracking-normal opacity-75">
+                    {event.venue.directions}
                   </p>
                 )}
 
