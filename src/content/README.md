@@ -18,6 +18,7 @@ venue:
   address: "Street 1"
   city: "Brussels"
   url: "https://maps.example/..."
+  directions: "Optional arrival note, e.g. which entrance to use"
 host: "Host or hosting company"
 registerUrl: "https://..."
 agenda:

@@ -6,8 +6,13 @@ startTime: "17:30"
 endTime: "21:00"
 venue:
   name: "Xylos"
-  address: "Noorderlaan 139"
+  address: "Malagastraat"
   city: "2030 Antwerp"
+  url: "https://www.google.com/maps/search/?api=1&query=Malagastraat%2C+2030+Antwerpen"
+  directions: >-
+    Roadworks are blocking the usual Noorderlaan entrance, so don't navigate
+    to Noorderlaan 139. Use the car park entrance on Malagastraat, 2030
+    Antwerp instead: there is a Xylos banner at the entrance.
 host: "Fabric Belgium"
 registerUrl: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=U1hZqJVQDkuuH5-YTxEivPyefcS5CXFGvfTAx9KA0UVUMTJZTUIzRFVMTUpKRExXRzYxTFk1Wk5MTC4u"
 agenda:

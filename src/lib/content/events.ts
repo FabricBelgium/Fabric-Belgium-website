@@ -25,6 +25,8 @@ export interface EventVenue {
   city?: string;
   /** Link to a map or the venue's own page */
   url?: string;
+  /** How to get in, shown with the venue — e.g. a different entrance during roadworks */
+  directions?: string;
 }
 
 export interface FabricEvent {
@@ -99,6 +101,7 @@ function parseVenue(value: unknown): EventVenue | undefined {
     address: asString(row.address),
     city: asString(row.city),
     url: asString(row.url),
+    directions: asString(row.directions),
   };
 }
 

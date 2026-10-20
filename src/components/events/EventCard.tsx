@@ -54,6 +54,11 @@ export function EventCard({ event }: EventCardProps) {
                   ) : (
                     venueLine
                   )}
+                  {event.venue?.directions && (
+                    <p className="mt-1 font-normal leading-relaxed text-text-secondary">
+                      {event.venue.directions}
+                    </p>
+                  )}
                 </dd>
               </div>
             )}
