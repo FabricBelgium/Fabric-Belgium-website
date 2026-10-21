@@ -1,7 +1,7 @@
 ---
 title: "Community Autumn Event"
 date: 2026-10-20
-status: upcoming
+status: past
 startTime: "17:30"
 endTime: "21:00"
 venue:
